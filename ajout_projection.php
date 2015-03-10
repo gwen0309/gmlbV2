@@ -26,37 +26,36 @@ mysql_select_db($bdd) or die("erreur de connexion a la base de donnees");
 $querydate= "select NOM_FILM, TIME(DATE_DEBUT_PROJECTION), TIME(DATE_FIN_PROJECTION), DATE(DATE_DEBUT_PROJECTION) FROM projeter p INNER JOIN films f WHERE f.ID_FILM = p.ID_FILM ORDER BY NOM_FILM";
 $result = mysql_query($querydate);
 
-if($result === FALSE) { 
-    die(mysql_error()); 
-}
 
-$queryfilms = "SELECT ID_FILM FROM films";
-$querysalle = "SELECT ID_SALLE FROM salle";
+$queryfilms = "SELECT ID_FILM, NOM_FILM FROM films";
+$querysalles = "SELECT ID_SALLE, NOM_SALLE FROM salle ";
 
 $resultfilms = mysql_query($queryfilms);
-$resultsalles = mysql_query($querysalle);
+$resultsalles = mysql_query($querysalles);
 
 $p = 0;
-$z=0;
+$z = 0;
 
 while($array = mysql_fetch_array($resultfilms)){
-$Nomf[$p] = $array['ID_FILM'];
+$idf[$p] = $array['ID_FILM'];
+$Nomf[$p] = $array['NOM_FILM'];
 $p++;
 }
 
 while($array2 = mysql_fetch_array($resultsalles)){
-$Salle[$z] = $array2['ID_SALLE'];
+$ids[$z] = $array2['ID_SALLE'];
+ $Noms[$z] = $array2['NOM_SALLE'];
 $z++;
 }
 
 echo "<form method='post' action='planning.php'>
 <select name='film' required >";
 for($o =0; $o< $p ;$o++){
-         echo "<option value='$Nomf[$o]'>$Nomf[$o]</option>";
+         echo "<option value='$idf[$o]'>$Nomf[$o]</option>";
     }	
 echo "</select><select name='salle' required >";
 for($e =0; $e< $z ;$e++){
-         echo "<option value='$Salle[$e]'>$Salle[$e]</option>";
+         echo "<option value='$ids[$e]'>$Noms[$e]</option>";
     }	
 echo "</select>
 		<table class='ds_box' cellpadding='0' cellspacing='0' id='ds_conclass' style='display: none;'>
