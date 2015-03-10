@@ -32,6 +32,7 @@ $password  = "";
 mysql_connect($host, $user,$password) or die("erreur de connexion au serveur");
 mysql_select_db($bdd) or die("erreur de connexion a la base de donnees");
 
+if($_POST['film']!=null){
 $film=$_POST['film'];
 $salle=$_POST['salle'];
  $datej=$_POST['datejour'];
@@ -50,14 +51,13 @@ echo $datej = date('Y-m-d H:i:s', $date);
 
  $queryproj= "INSERT INTO projeter (ID_FILM, ID_SALLE, DATE_DEBUT_PROJECTION) VALUES ($film,$salle,'".$datej."')";
   $insertion = mysql_query($queryproj);
+}
   
 $querydate= "select NOM_FILM, TIME(DATE_DEBUT_PROJECTION), TIME(DATE_FIN_PROJECTION), DATE(DATE_DEBUT_PROJECTION) FROM projeter p INNER JOIN films f WHERE f.ID_FILM = p.ID_FILM ORDER BY NOM_FILM";
 
 $result = mysql_query($querydate);
 
-if($insertion === FALSE ) { 
-    die(mysql_error()); 
-}
+
 
 
 $i = 0;
