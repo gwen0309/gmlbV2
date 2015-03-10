@@ -1,0 +1,458 @@
+/* General settings*/
+
+html, body {
+    margin: 0 auto;
+    width: 100%;
+    background-color: black;
+    color: white;
+    font-family:  'Century Gothic';
+
+}
+
+div{
+    font-family:  'Century Gothic';    
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+/* Connexion */
+
+#connexion{
+    margin: 1% 5% 0 0;
+    text-align: right;
+    
+}
+
+.btnConnexion{
+    background: none repeat scroll 0 0 grey;
+    border: 1px solid white;
+    border-radius: 35px;
+    color: white;
+    font-family: Arial;
+    font-size: 15px;
+    padding: 0 4px;
+    text-decoration: none;
+    text-shadow: 1px 4px 4px #0d0b0d;
+}
+
+/* Header et nav*/
+header{
+    margin: 1% 11%;
+    display: inline-block;
+    width: 78%;
+}
+
+#logoCannes{
+    width : 14%;
+    display: inline;
+    margin: 0 4%;
+}
+
+#banniere{
+    width: 70%;
+    display: inline;
+}
+
+nav{
+    margin: -2% 12% 1% 8%;
+    text-align: right;
+    width: 80%;
+}
+nav li{
+    display: inline-block;
+    margin-right:5%;
+}
+
+/* MENU HORIZONTAL */
+
+#menu{
+        width: 100%;
+        margin: 0;
+        padding: 10px 0 0 0;
+        list-style: none;
+        background: #111;
+        /* background: -moz-linear-gradient(#444, #111);
+        background: -webkit-gradient(linear,left bottom,left top,color-stop(0, #111),color-stop(1, #444));
+        background: -webkit-linear-gradient(#444, #111);
+        background: -o-linear-gradient(#444, #111);
+        background: -ms-linear-gradient(#444, #111);
+        background: linear-gradient(#444, #111);
+       -moz-border-radius: 50px;
+        border-radius: 50px;
+        -moz-box-shadow: 0 2px 1px #9c9c9c;
+        -webkit-box-shadow: 0 2px 1px #9c9c9c;
+        box-shadow: 0 2px 1px #9c9c9c; */
+		border-top: 15px solid black; /* Decale le menu de 15px vers le haut */
+		font: bold 15px/25px Arial, Helvetica;
+		
+  
+}
+
+#menu li{
+        float: right;
+        padding: 0 0 10px 0;
+        position: relative;
+}
+
+#menu a{
+        float: right;
+        height: 25px;
+        padding: 0 25px;
+        color: #999;
+        text-transform: uppercase;
+        text-decoration: none;
+        /*text-shadow: 0 1px 0 #000;*/
+		
+		font: bold 12px/25px Arial, Helvetica;
+		margin: 1px 0; /* espace les liens d'1 px */
+  		/*padding: 8px 10px; /* marges internes pour aérer */ 
+  		color: #999;
+  		background: #111;
+  		text-decoration: none; /* on vire le soulignement */
+
+  /* on définit la transition pour les navigateurs */
+  -webkit-transition: all .3s; /* Chrome/Safari */
+  -moz-transition: all .3s; /* Firefox (plus trop nécessaire) */
+  transition: all .3s; /* syntaxe officielle */
+}
+
+#menu li:hover > a{
+        /*color: #fafafa;*/
+		background: #E9C200;
+  		color: #FFF;
+  		padding-left: 30px; /* décalage du contenu de 10px vers la droite (30-20 = 10) */
+}
+
+*html #menu li a:hover{ /* IE6 */
+        color: #fafafa;
+}
+
+#menu li:hover > ul{
+        display: block;
+}
+
+#menu ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: none;
+    position: absolute;
+    top: 35px;
+    left: 0;
+    z-index: 99999;
+    background: #444;
+    background: -moz-linear-gradient(#444, #111);
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0, #111),color-stop(1, #444));
+    background: -webkit-linear-gradient(#444, #111);
+    background: -o-linear-gradient(#444, #111);
+    background: -ms-linear-gradient(#444, #111);
+    background: linear-gradient(#444, #111);
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#menu ul li{
+    float: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+    -moz-box-shadow: 0 1px 0 #111111, 0 2px 0 #777777;
+    -webkit-box-shadow: 0 1px 0 #111111, 0 2px 0 #777777;
+    box-shadow: 0 1px 0 #111111, 0 2px 0 #777777;
+}
+
+#menu ul li:last-child{
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+#menu ul a{
+    padding: 10px;
+    height: auto;
+    line-height: 1;
+    display: block;
+    white-space: nowrap;
+    float: none;
+    text-transform: none;
+}
+
+*html #menu ul a{ /* IE6 */
+        height: 10px;
+        width: 150px;
+}
+
+*:first-child+html #menu ul a{ /* IE7 */
+        height: 10px;
+        width: 150px;
+}
+
+#menu ul a:hover{
+        background: #0186ba;
+        background: -moz-linear-gradient(#04acec,  #0186ba);
+        background: -webkit-gradient(linear, left top, left bottom, from(#04acec), to(#0186ba));
+        background: -webkit-linear-gradient(#04acec,  #0186ba);
+        background: -o-linear-gradient(#04acec,  #0186ba);
+        background: -ms-linear-gradient(#04acec,  #0186ba);
+        background: linear-gradient(#04acec,  #0186ba);
+}
+
+#menu ul li:first-child a{
+    -moz-border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
+}
+
+#menu ul li:first-child a:after{
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: -8px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 8px solid #444;
+}
+
+#menu ul li:first-child a:hover:after{
+    border-bottom-color: #04acec;
+}
+
+#menu ul li:last-child a{
+    -moz-border-radius: 0 0 5px 5px;
+    -webkit-border-radius: 0 0 5px 5px;
+    border-radius: 0 0 5px 5px;
+}
+
+/* TEST MENU VERTICAL */
+
+/* style du bloc ul */
+.menu-vertical
+{
+  width: 250px; /* optionnel, c'est pour la démo */
+  list-style: none; /* supprime les puces de liste */
+  padding: 4px; /* on fait un peu de place autour des liens */
+  margin: 0; /* on annule les marges */
+  /*background: #F2F2F2;*/
+  background: black;
+ /* background: -moz-linear-gradient(#444, #111);
+  background: -webkit-gradient(linear,left bottom,left top,color-stop(0, #111),color-stop(1, #444));
+  background: -webkit-linear-gradient(#444, #111);
+  background: -o-linear-gradient(#444, #111);
+  background: -ms-linear-gradient(#444, #111);
+  background: linear-gradient(#444, #111);*/
+  font: bold 15px/25px Arial, Helvetica;
+  float: left;
+  width:100px;
+  height:850px;
+}
+ 
+/* styles des liens et éléments de liste */
+.mv-item,.mv-item a
+{
+  /* les liens et item deviennent des blocs */
+  /* suffit théoriquement à virer les puces de liste */
+  display: block;
+}
+ 
+/* styles des liens */
+.mv-item a
+{
+  margin: 1px 0; /* espace les liens d'1 px */
+  padding: 8px 20px; /* marges internes pour aérer */ 
+  color: #999;
+  background: #111;
+  text-decoration: none; /* on vire le soulignement */
+
+  /* on définit la transition pour les navigateurs */
+  -webkit-transition: all .3s; /* Chrome/Safari */
+  -moz-transition: all .3s; /* Firefox (plus trop nécessaire) */
+  transition: all .3s; /* syntaxe officielle */
+}
+ 
+/* styles changeants au survol et focus */
+.mv-item a:hover, .mv-item a:focus
+{
+  background: #E9C200;
+  color: #FFF;
+  padding-left: 30px; /* décalage du contenu de 10px vers la droite (30-20 = 10) */
+}
+
+
+/* Rétablissement du flottement */
+#menu:after
+{
+	visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+* html #menu             { zoom: 1; } /* IE6 */
+*:first-child+html #menu { zoom: 1; } /* IE7 */
+
+/* Caractéristiques */
+#caracteristics
+{
+	width:600px;
+	height:400px;
+	font: bold 15px/25px Arial, Helvetica;
+	border-top: 15px solid black;
+	border-left: 150px solid black;	
+}
+
+/* Tableau liste */
+
+table
+{
+	/*border: medium solid #CBCBCB; */
+	border-collapse: collapse;
+	width: 140%; 
+	
+}
+td, th, tr
+{
+	border: thin solid #CBCBCB;
+	width: auto; 
+	padding: 5px; 
+	text-align: center; 
+	width: 17%; 
+}
+
+/* Galerie */
+#galerie{
+    background-color: black;
+    height: auto;
+    margin: 0% 15%;
+    width: 70%;
+}
+
+/* Footer */
+footer{
+    background-color: black;
+    height: auto;
+    margin: 3% 15%;
+    height: auto;
+    width: 70%;
+}
+
+footer h2{
+    width: 16%;
+    margin: 1% 2%;
+    display: inline-block;
+    font-size: 16px;
+    vertical-align: top;
+}
+
+footer ul{
+    display: inline;
+    list-style: none;
+}
+
+footer li{
+    display: inline;
+    margin: 0 1px;
+}
+footer img{
+    height: 40px;
+    width: 40px;
+}
+#socialnetwork{
+    display: inline-block;
+    width: 30%;
+    margin-left: 49%;
+    height: 40px;
+}
+
+
+
+/*Page de connexion */
+#login{
+    width: 100%;
+    margin-top: 50px;
+}
+#EspaceConnexion{
+    background-color: white;
+    color:black;
+    display: inline-block;
+    margin: 0 5% 0 15%;
+    text-align: center;
+    width: 30%;
+    border-radius: 15px;
+    height: auto;
+    padding-bottom: 1%;
+}
+#EspaceConnexion input{
+    margin : 5px 0px;
+}
+
+#EspaceInscription{
+    font-family:  'Century Gothic';    
+    background-color: white;
+    color:black;
+    border-radius: 15px;
+    display: inline-block;
+    margin: 0 12% 0 5%;
+    text-align: center;
+    width: 30%;
+    height: auto;
+    vertical-align: top;
+    padding: 0% 1% 2% 1%;
+
+}
+
+#EspaceConnexion h1,  #EspaceInscription h1{
+    color:#D0A42E;
+}
+
+#EspaceInscription h2 {
+    font-size: 15px;
+    color:#999999;
+}
+
+#EspaceInscription p, label{
+    font-size: 14px;
+    font-family:  'Century Gothic';    
+
+}
+
+#login input[type=submit]{
+    font-size: 18px;
+    margin-top: 5%;
+}
+
+/*Chargement des images pour carousel*/
+#owl-demo {
+	position:relative;
+    margin-top:45px;
+	
+    }
+
+#owl-demo .item img{
+    display: block;
+    width: 100%;
+    height: auto;
+    }
+
+/*Positionnement des boutons de carousel*/
+.owl-theme .owl-controls .owl-buttons div {
+	position: absolute;	
+}
+
+/*Boutons de gauche et de droite */
+.owl-theme .owl-controls .owl-buttons .owl-prev{
+	left: -45px;
+	top: 275px;
+}
+.owl-theme .owl-controls .owl-buttons .owl-next{
+right: -45px;
+top: 275px;
+}
+/*Fin Carousel*/
+
