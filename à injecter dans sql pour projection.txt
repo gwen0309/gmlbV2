@@ -1,7 +1,7 @@
 INSERT INTO `films` (`ID_FILM`, `NOM_FILM`, `GENRE_FILM`, `DUREE`, `CATEGORIE`) VALUES
 (1, 'Superman', 'az', 30, 'az'),
 (2, 'Batman', 'zaz', 84, 'az'),
-(2, 'Ironman', 'zaz', 84, 'az');
+(3, 'Ironman', 'zaz', 84, 'az');
 
 INSERT INTO `projeter` (`ID_FILM`, `ID_SALLE`, `ID_PROJECTION`, `DATE_DEBUT_PROJECTION`, `DATE_FIN_PROJECTION`) VALUES
 (2, 4, 5, '2015-05-08 16:01:00', '0000-00-00 00:00:00'),
