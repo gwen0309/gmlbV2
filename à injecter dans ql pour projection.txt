@@ -1,0 +1,15 @@
+INSERT INTO `films` (`ID_FILM`, `NOM_FILM`, `GENRE_FILM`, `DUREE`, `CATEGORIE`) VALUES
+(1, 'Superman', 'az', 30, 'az'),
+(2, 'Batman', 'zaz', 84, 'az'),
+(2, 'Ironman', 'zaz', 84, 'az');
+
+INSERT INTO `projeter` (`ID_FILM`, `ID_SALLE`, `ID_PROJECTION`, `DATE_DEBUT_PROJECTION`, `DATE_FIN_PROJECTION`) VALUES
+(2, 4, 5, '2015-05-08 16:01:00', '0000-00-00 00:00:00'),
+(1, 1, 4, '2015-05-06 06:01:00', '0000-00-00 00:00:00');
+
+INSERT INTO `salle` (`ID_SALLE`, `NOM_SALLE`, `CAPACITE`, `NUMERO_RUE_SALLE`, `RUE_SALLE`, `CODE_POSTAL_SALLE`, `VILLE_SALLE`) VALUES
+(1, 'salle 1', 15, 15, 'az', 15, 'az'),
+(2, 'salle 2', 15, 15, '15', 15, 'az'),
+(3, 'salle 3', NULL, NULL, NULL, NULL, NULL),
+(4, 'salle 4', NULL, NULL, NULL, NULL, NULL),
+(5, 'salle 5', NULL, NULL, NULL, NULL, NULL);
