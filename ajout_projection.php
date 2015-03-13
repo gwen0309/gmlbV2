@@ -66,12 +66,12 @@ echo "</select>
 
 		<input type='text' name='datejour' onclick='ds_sh(this);' />
 <select name='heure' required >";
-for($h =8; $h< 23 ;$h++){
+for($h =8; $h< 12 ;$h++){
          echo "<option value=$h>$h</option>";
     }	
 echo "</select>
 <select name='min' required >";
-for($min =1; $min<= 60 ;$min++){
+for($min =0; $min<= 59 ;$min++){
          echo "<option value=$min>$min</option>";
     }	
 echo "</select>
