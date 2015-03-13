@@ -1,5 +1,8 @@
 <div id="connexion">
-    <input id="boutonConnexion" class="btnConnexion" type="button" value="Connexion" onClick="document.location='login.php'" alt="Connexion">
+  <!--  <input id="boutonConnexion" class="btnConnexion" type="button" value="Connexion" onClick="document.location='login.php'" alt="Connexion">
+</div>-->
+     <a class="button" href="login.php" style="top: 236px; left: 199px;">Connexion</a>
+
 </div>
         
 <header>  

@@ -30,7 +30,7 @@
                     <p>Si vous souhaitez faire partie de nos partenaires Hébergement, merci de remplir ce formulaire. </p>
                     <p>Vous serez recontactés prochainement par l'organisation.</p> </br>
                     
-                    <form method="post" action="envoiMail.php">
+                    <form method="get" action="envoiMail.php">
                         <label>Nom de l'hébergement : </label> <input type="text" name="nom_hebergement" required/><br/>
 
                         <label>Numéro de téléphone :  </label><input type="tel" name="telephone" required/><br/>
@@ -40,7 +40,8 @@
                           <option value="chambre">Chambre d'hôte</option>
                           <option value="appartement">Appartement</option>
                           <option value="villa">Villa</option>
-                        </select>
+                        </select><br/>
+                        <label>Nombre de places disponible : <input type="number" name="place_dispo" required/>
                         <br/><br/>
                         
                         <h2> Adresse de l'hébergement </h2>
