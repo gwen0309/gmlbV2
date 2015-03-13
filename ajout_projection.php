@@ -20,18 +20,18 @@ $user = "root";
 $bdd = "filrouge";
 $password  = "";
 
-mysql_connect($host, $user,$password) or die("erreur de connexion au serveur");
-mysql_select_db($bdd) or die("erreur de connexion a la base de donnees");
+$con = mysqli_connect($host, $user,$password) or die("erreur de connexion au serveur");
+mysqli_select_db($con, $bdd) or die("erreur de connexion a la base de donnees");
   
 $querydate= "select NOM_FILM, TIME(DATE_DEBUT_PROJECTION), TIME(DATE_FIN_PROJECTION), DATE(DATE_DEBUT_PROJECTION) FROM projeter p INNER JOIN films f WHERE f.ID_FILM = p.ID_FILM ORDER BY NOM_FILM";
-$result = mysql_query($querydate);
+$result = mysqli_query($con, $querydate);
 
 
 $queryfilms = "SELECT ID_FILM, NOM_FILM FROM films";
 $querysalles = "SELECT ID_SALLE, NOM_SALLE FROM salle ";
 
-$resultfilms = mysql_query($queryfilms);
-$resultsalles = mysql_query($querysalles);
+$resultfilms = mysqli_query($con, $queryfilms);
+$resultsalles = mysqli_query($con, $querysalles);
 
 $p = 0;
 $z = 0;
