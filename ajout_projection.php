@@ -27,8 +27,8 @@ $querydate= "select NOM_FILM, TIME(DATE_DEBUT_PROJECTION), TIME(DATE_FIN_PROJECT
 $result = mysql_query($querydate);
 
 
-$queryfilms = "SELECT ID_FILM, NOM_FILM FROM films";
-$querysalles = "SELECT ID_SALLE, NOM_SALLE FROM salle ";
+$queryfilms = "SELECT * FROM films";
+$querysalles = "SELECT * FROM salle ";
 
 $resultfilms = mysql_query($queryfilms);
 $resultsalles = mysql_query($querysalles);
@@ -39,6 +39,9 @@ $z = 0;
 while($array = mysql_fetch_array($resultfilms)){
 $idf[$p] = $array['ID_FILM'];
 $Nomf[$p] = $array['NOM_FILM'];
+$Dureef[$p] = $array['DUREE'];
+$Catf[$p] = $array['CATEGORIE'];
+
 $p++;
 }
 
@@ -48,7 +51,7 @@ $ids[$z] = $array2['ID_SALLE'];
 $z++;
 }
 
-echo "<form method='post' action='planning.php'>
+echo "<form method='post' action='ajouter_projection.php'>
 <select name='film' required >";
 for($o =0; $o< $p ;$o++){
          echo "<option value='$idf[$o]'>$Nomf[$o]</option>";
@@ -67,6 +70,9 @@ echo "</select>
 		<input type='text' name='datejour' onclick='ds_sh(this);' />
 <select name='heure' required >";
 for($h =8; $h< 12 ;$h++){
+         echo "<option value=$h>$h</option>";
+    }
+for($h =16; $h< 22 ;$h++){
          echo "<option value=$h>$h</option>";
     }	
 echo "</select>

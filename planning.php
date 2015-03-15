@@ -1,4 +1,4 @@
-﻿
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -24,6 +24,15 @@
 	  <table width="800" border="1">
 
   <?php 
+  
+ /*--------A modifier chaque année-------*/
+$anneeD=15;
+$moisD=05;
+$jourD=13;
+$jourDS="jeudi";
+$duree=15;
+/*-----------------Fin--------------------*/
+  
 $host = "localhost";  
 $user = "root";
 $bdd = "filrouge";
@@ -32,26 +41,7 @@ $password  = "";
 mysql_connect($host, $user,$password) or die("erreur de connexion au serveur");
 mysql_select_db($bdd) or die("erreur de connexion a la base de donnees");
 
-if($_POST['film']!=null){
-$film=$_POST['film'];
-$salle=$_POST['salle'];
- $datej=$_POST['datejour'];
 
- $tabDate = explode('/' , $datej);
- $date_conv  = $tabDate[2].'-'.$tabDate[1].'-'.$tabDate[0];
- 
- $heure=$_POST['heure'];
- $min=$_POST['min'];
- echo $datej= $date_conv." ".$heure.":".$min.":00";
-
- $date =  strtotime($datej);
-
-echo $datej = date('Y-m-d H:i:s', $date);
-
-
- $queryproj= "INSERT INTO projeter (ID_FILM, ID_SALLE, DATE_DEBUT_PROJECTION) VALUES ($film,$salle,'".$datej."')";
-  $insertion = mysql_query($queryproj);
-}
 $querydate= "select NOM_FILM, NOM_SALLE, TIME(DATE_DEBUT_PROJECTION), TIME(DATE_FIN_PROJECTION), DATE(DATE_DEBUT_PROJECTION) FROM projeter p INNER JOIN films f ON f.ID_FILM = p.ID_FILM  INNER JOIN salle s ON s.ID_SALLE = p.ID_SALLE ORDER BY NOM_FILM";
 $result = mysql_query($querydate);
 
@@ -83,73 +73,102 @@ echo "<tr>
 		echo "<td>Salle $Noms[$h]</td>";
 	}
 echo "</tr>";
-for($jour=6;$jour<21;$jour++){
-	if($jour<10){
-	echo "<tr><td>Projection matin du 2015-05-0$jour</td>";
-	for($h=0;$h<$b;$h++){		
-		for( $j=0;$j<$i;$j++){
-			if($jourDebut[$j]=="2015-05-0".$jour){ 
-				if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00" && $Nomsp[$j]==$Noms[$h] ){
-					echo  "<td id='film".$compteur."'>$Nomf[$j]<br>$DateDeb[$j] - $DateFin[$j]</td>"; 
+
+
+for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
+	$jourP=$jour+$jourD;
+
+	if($jourP<10){
+			echo "<tr><td>Projection matin du 20$anneeD-$moisD-$jourP</td>";
+			for($h=0;$h<$b;$h++){	
+				$compt=0;
+				for( $j=0;$j<$i;$j++){
+					
+					if($jourDebut[$j]=="20".$anneeD."-0".$moisD."-0".$jourP){ 
+						
+						if( $Nomsp[$j]==$Noms[$h]){
+							
+							if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00"){
+								$compt++;
+								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+											}
+				
+						}
+						
+					}
+				}
+				if($compt==0){
+					echo "<td></td>";
+					}	
+			}
 		
-					}
-					else{
-						echo "<td></td>";
-					}
-				}
-			}
-		}
-	}	
-	else{
-	echo "<tr><td>Projection matin du 2015-05-$jour</td>";
-	for($h=0;$h<$b;$h++){		
+	echo "</tr>";
+	}else{
+		echo "<tr><td>Projection matin du 20$anneeD-$moisD-$jourP</td>";
+	for($h=0;$h<$b;$h++){	
+		$compt=0;
 		for( $j=0;$j<$i;$j++){
-			if($jourDebut[$j]=="2015-05-".$jour){ 
-				if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00"&& $Nomsp[$j]==$Noms[$h]){
-					echo  "<td id='film".$compteur."'>$Nomf[$j]<br>$DateDeb[$j] - $DateFin[$j]</td>"; 
+			
+			if($jourDebut[$j]=="20".$anneeD."-0".$moisD."-".$jourP){ 
+				
+				if( $Nomsp[$j]==$Noms[$h]){
+					
+					if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00"){
+						$compt++;
+						echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
 									}
-						else{
-						echo "<td></td>";
-					}
+		
 				}
+				
 			}
 		}
+		if($compt==0){
+			echo "<td></td>";
+			}	
+	}
 	}
 	echo "</tr><tr>";
-	
-	if($jour<10){
-	echo "<tr><td>Projection AM du 2015-05-0$jour</td>";
-	for($h=0;$h<$b;$h++){		
+	if($jourP<10){
+	echo "<tr><td>Projection AM du 20$anneeD-$moisD-$jourP</td>";
+	for($h=0;$h<$b;$h++){	
+		$compt=0;
 		for( $j=0;$j<$i;$j++){
-			if($jourDebut[$j]=="2015-05-0".$jour){ 
-				if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00"&& $Nomsp[$j]==$Noms[$h]){
-					echo  "<td id='film".$compteur."'>$Nomf[$j]<br>$DateDeb[$j] - $DateFin[$j]</td>"; 
-			
-					}
-						else{
-						echo "<td></td>";
-					}
+			if($jourDebut[$j]=="20".$anneeD."-0".$moisD."-0".$jourP){ 
+				if( $Nomsp[$j]==$Noms[$h]){
+					if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00"){
+						$compt++;
+						echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+									}
+		
 				}
 			}
 		}
-	}	
-	else{
-	echo "<tr><td>Projection AM du 2015-05-$jour</td>";
-	for($h=0;$h<$b;$h++){		
-		for( $j=0;$j<$i;$j++){
-			if($jourDebut[$j]=="2015-05-".$jour){ 
-				if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00"&& $Nomsp[$j]==$Noms[$h]){
-					echo  "<td id='film".$compteur."'>$Nomf[$j]<br>$DateDeb[$j] - $DateFin[$j]</td>"; 
-			
-					}
-						else{
-						echo "<td></td>";
-					}
-				}
-			}
+		if($compt==0){
+		echo "<td></td>";
 		}
 	}
-	
+	echo "</tr>";
+	}
+	else{
+	echo "<tr><td>Projection AM du 20$anneeD-$moisD-$jourP</td>";
+		for($h=0;$h<$b;$h++){	
+		$compt=0;
+		for( $j=0;$j<$i;$j++){
+			if($jourDebut[$j]=="20".$anneeD."-0".$moisD."-".$jourP){ 
+				if( $Nomsp[$j]==$Noms[$h]){
+					if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00"){
+						$compt++;
+						echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+									}
+		
+				}
+			}
+		}
+		if($compt==0){
+		echo "<td></td>";
+		}
+	}
+	}
 echo "</tr>";
 }
 	echo "</table>"
