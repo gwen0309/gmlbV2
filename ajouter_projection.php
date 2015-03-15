@@ -45,8 +45,8 @@ $datej= $date_conv." ".$heure.":".$min.":00";
 $date =  strtotime($datej);
 $datej = date('Y-m-d H:i:s', $date);
 
-echo $heureproj = date('H:i:s',$date);
-echo $jourproj = date('Y-m-d', $date);
+ $heureproj = date('H:i:s',$date);
+ $jourproj = date('Y-m-d', $date);
 
 //30 minutes de présentation 
 $date2 = strtotime("+30 minutes", $date);
@@ -56,18 +56,19 @@ $datefin = date('Y-m-d H:i:s', $date);
 
 /*-----Fin traitement date------*/
 
+/*-------Teste s'il y a des film prevus dans la meme salle---*/
 $z=0;
+$r=0;
 $querytest= "SELECT TIME(DATE_DEBUT_PROJECTION), DATE(DATE_DEBUT_PROJECTION) FROM projeter WHERE ID_SALLE like '$salle'";
  $resulttest = mysql_query($querytest);
 
+ if($resulttest==true){
  while($array2 = mysql_fetch_array($resulttest)){
-echo $heuretest[$z] = $array2['TIME(DATE_DEBUT_PROJECTION)'];
-echo $jourtest[$z] = $array2['DATE(DATE_DEBUT_PROJECTION)'];
-echo "</br>";
+$heuretest[$z] = $array2['TIME(DATE_DEBUT_PROJECTION)'];
+$jourtest[$z] = $array2['DATE(DATE_DEBUT_PROJECTION)'];
 $z++;
 }
 
-$r=0;
 for($a=0;$a<$z;$a++)
 {
 	if( $jourproj==$jourtest[$a]){		
@@ -90,7 +91,8 @@ for($a=0;$a<$z;$a++)
 	}
 
 }
-
+ }
+ /*-----Fin test--------------*/
 if($r==0){
 	$queryproj= "INSERT INTO projeter (ID_FILM, ID_SALLE, DATE_DEBUT_PROJECTION, DATE_FIN_PROJECTION) VALUES ($film,$salle,'".$datej."','".$datefin."')";
 				$insertion = mysql_query($queryproj);
