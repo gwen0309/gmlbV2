@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="calendrier.js"></script>
 		<link rel="stylesheet" media="screen" type="text/css" title="Design" href="design.css" />
+		  <link rel="stylesheet" href="styles.css" type="text/css" />	
 <meta charset="utf-8">	       
 <title> Saisi Projection</title>	
 </head>  
@@ -50,25 +51,39 @@ $ids[$z] = $array2['ID_SALLE'];
  $Noms[$z] = $array2['NOM_SALLE'];
 $z++;
 }
+?>
 
-echo "<form method='post' action='ajouter_projection.php'>
-<select name='film' required >";
+<div id="caracteristics">
+<div id="general">
+<form method='post' action='ajouter_projection.php'>
+
+<label>Nom du film :</label> 
+<select name='film' required >"
+<?php
 for($o =0; $o< $p ;$o++){
          echo "<option value='$idf[$o]'>$Nomf[$o]</option>";
-    }	
-echo "</select><select name='salle' required >";
+}?>
+</select></br>
+
+<label>Nom de la salle :</label> 
+<select name='salle' required >
+<?php
 for($e =0; $e< $z ;$e++){
          echo "<option value='$ids[$e]'>$Noms[$e]</option>";
-    }	
-echo "</select>
-		<table class='ds_box' cellpadding='0' cellspacing='0' id='ds_conclass' style='display: none;'>
-			<tr>
-				<td id='ds_calclass'></td>
-			</tr>
-		</table>
+}?>
+</select></br>
 
-		<input type='text' name='datejour' onclick='ds_sh(this);' />
-<select name='heure' required >";
+<label>Jour de projection :</label> 
+<table class='ds_box' cellpadding='0' cellspacing='0' id='ds_conclass' style='display: none;'>
+	<tr>
+		<td id='ds_calclass'></td>
+	</tr>
+</table>
+<input type='text' name='datejour' onclick='ds_sh(this);' /></br>
+
+<label>Heure de projection :</label> 
+<select name='heure' required >
+<?php
 for($h =8; $h< 12 ;$h++){
          echo "<option value=$h>$h</option>";
     }
@@ -80,10 +95,12 @@ echo "</select>
 for($min =0; $min<= 59 ;$min++){
          echo "<option value=$min>$min</option>";
     }	
-echo "</select>
-<input type='submit' value='Ajouter la projection'>
-</form>";
+?></select></br>
 
-?>
+<input type='submit' value='Ajouter la projection'>
+</div>
+</div>
+
+</form>
 </body>
 </html>
