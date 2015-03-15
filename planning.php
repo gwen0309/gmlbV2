@@ -29,8 +29,8 @@ $user = "root";
 $bdd = "filrouge";
 $password  = "";
 
-$con = mysqli_connect($host, $user,$password) or die("erreur de connexion au serveur");
-mysqli_select_db($con, $bdd) or die("erreur de connexion a la base de donnees");
+mysql_connect($host, $user,$password) or die("erreur de connexion au serveur");
+mysql_select_db($bdd) or die("erreur de connexion a la base de donnees");
 
 if($_POST['film']!=null){
 $film=$_POST['film'];
@@ -50,13 +50,13 @@ echo $datej = date('Y-m-d H:i:s', $date);
 
 
  $queryproj= "INSERT INTO projeter (ID_FILM, ID_SALLE, DATE_DEBUT_PROJECTION) VALUES ($film,$salle,'".$datej."')";
-  $insertion = mysqli_query($con, $queryproj);
+  $insertion = mysql_query($queryproj);
 }
 $querydate= "select NOM_FILM, NOM_SALLE, TIME(DATE_DEBUT_PROJECTION), TIME(DATE_FIN_PROJECTION), DATE(DATE_DEBUT_PROJECTION) FROM projeter p INNER JOIN films f ON f.ID_FILM = p.ID_FILM  INNER JOIN salle s ON s.ID_SALLE = p.ID_SALLE ORDER BY NOM_FILM";
-$result = mysqli_query($con, $querydate);
+$result = mysql_query($querydate);
 
 $querysalle= "select NOM_SALLE, ID_SALLE FROM salle";
-$resultsalle = mysqli_query($con, $querysalle);
+$resultsalle = mysql_query($querysalle);
 
 $i = 0;
 $b =0;
@@ -68,7 +68,7 @@ $Noms[$b] = $rowsalle['NOM_SALLE'];
 $b++;
 }
 
-while($row = mysqli_fetch_array($result)){
+while($row = mysql_fetch_array($result)){
 $Nomsp[$i] =	$row['NOM_SALLE'];
 $Nomf[$i] = $row['NOM_FILM'];
 $DateDeb[$i] = $row['TIME(DATE_DEBUT_PROJECTION)'];
