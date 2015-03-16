@@ -51,12 +51,12 @@ $datej = date('Y-m-d H:i:s', $date);
 if($tr=="oui")
 {
 $date2 = strtotime("+60 minutes", $date);
-echo $tr;
+
 }
 else
 {
 $date2 = strtotime("+30 minutes", $date);
-echo $tr."caca";
+
 }
 //durée du film
 $date = strtotime("+$duree[0] minutes", $date2);
@@ -84,7 +84,13 @@ for($a=0;$a<$z;$a++)
 		{		
 			if( $heuretest[$a]>= "08:00:00" && $heuretest[$a]<= "12:59:00")
 			{
-			$r++;
+			if($tr!="oui")
+				{
+				$r++;
+				}
+				else{
+				$r=9000;
+				}
 			}
 
 		}
@@ -105,7 +111,10 @@ if($r==0){
 	$queryproj= "INSERT INTO projeter (ID_FILM, ID_SALLE, DATE_DEBUT_PROJECTION, DATE_FIN_PROJECTION) VALUES ($film,$salle,'".$datej."','".$datefin."')";
 				$insertion = mysql_query($queryproj);
 }
-else{
+else if($r>=9000)
+	{
+	echo "pas de tapis rouge le matin !";
+}else{
 	echo "pas bon";
 }
  
