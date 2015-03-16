@@ -2,8 +2,8 @@
 <html lang="fr"> 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="calendrier.js"></script>
-		<link rel="stylesheet" media="screen" type="text/css" title="Design" href="design.css" />
+<script type="text/javascript" src="scripts/calendrier.js"></script>
+		
 		  <link rel="stylesheet" href="styles.css" type="text/css" />	
 <meta charset="utf-8">	       
 <title> Saisi Projection</title>	
@@ -72,6 +72,10 @@ for($e =0; $e< $z ;$e++){
          echo "<option value='$ids[$e]'>$Noms[$e]</option>";
 }?>
 </select></br>
+
+<label>Projection avec tapis rouge :</label> 
+<input type= "radio" name="tr" value="oui"/> Oui
+<input type= "radio" checked name="tr" value="non"/> Non</br>
 
 <label>Jour de projection :</label> 
 <table class='ds_box' cellpadding='0' cellspacing='0' id='ds_conclass' style='display: none;'>

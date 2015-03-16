@@ -21,9 +21,8 @@ mysql_select_db($bdd) or die("erreur de connexion a la base de donnees");
 $film=$_POST['film'];
 $salle=$_POST['salle'];
 $datej=$_POST['datejour'];
+$tr=$_POST['tr'];
  
-
-
 $queryfilm= "SELECT DUREE, CATEGORIE FROM films WHERE ID_FILM = '$film'";
 $resultfilm = mysql_query($queryfilm);
 
@@ -48,8 +47,17 @@ $datej = date('Y-m-d H:i:s', $date);
  $heureproj = date('H:i:s',$date);
  $jourproj = date('Y-m-d', $date);
 
-//30 minutes de présentation 
+//30 minutes de présentation, 60 si tapis rouge
+if($tr=="oui")
+{
+$date2 = strtotime("+60 minutes", $date);
+echo $tr;
+}
+else
+{
 $date2 = strtotime("+30 minutes", $date);
+echo $tr."caca";
+}
 //durée du film
 $date = strtotime("+$duree[0] minutes", $date2);
 $datefin = date('Y-m-d H:i:s', $date);

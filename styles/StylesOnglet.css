@@ -1,0 +1,55 @@
+
+/*Gestion des contenus de l'onglet*/
+#onglet {
+    width:100%;
+    display:inline-block;
+	  border-radius:3px;
+        box-shadow:-1px 1px 1px rgba(0,0,0,0.15);
+}
+ 
+/*Les onglets de l'id "onglet"*/ 
+#lien_onglet{
+	height:30px;
+	color: #7a7a74;
+   font-size: 14px;
+   font-family: Helvetica, Arial, Sans-Serif;
+   text-decoration: none;
+   vertical-align: middle;
+}
+ 
+#lien_onglet li {
+	margin:0px 5px;
+	float:left;
+	list-style:none;
+	width:260px;
+
+}
+ 
+
+
+#lien_onglet li:hover {
+	border-top-color: #E9C200;
+   background: #E9C200;
+   color: #fafafa;
+}
+
+#lien_onglet li.active , li.active a:hover {
+	border-top-color: #050505;
+   background: #050505;
+}
+
+/*Contenus des tables de l'onglet*/
+#contenu_onglet {
+	padding:15px;
+	border-radius:3px;
+	box-shadow:-1px 1px 1px rgba(0,0,0,0.15);
+	background:#fff;
+}
+ 
+.contenu {
+	display:none;
+}
+
+.contenu.active {
+	display:block;
+}
