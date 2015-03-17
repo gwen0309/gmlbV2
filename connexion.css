@@ -1,0 +1,60 @@
+/***********************************/
+/* Page de connexion / Inscription */
+/***********************************/
+
+#login{
+    width: 100%;
+    margin-top: 50px;
+}
+
+#login input[type=submit]{
+    font-size: 18px;
+    margin-top: 5%;
+}
+
+#EspaceConnexion{
+    background-color: white;
+    color:black;
+    display: inline-block;
+    margin: 0 5% 0 15%;
+    text-align: center;
+    width: 30%;
+    border-radius: 15px;
+    height: auto;
+    padding-bottom: 1%;
+}
+
+#EspaceConnexion input{
+    margin : 5px 0px;
+}
+
+#EspaceInscription{
+    font-family:  'Century Gothic';    
+    background-color: white;
+    color:black;
+    border-radius: 15px;
+    display: inline-block;
+    margin: 0 12% 0 5%;
+    text-align: center;
+    width: 30%;
+    height: auto;
+    vertical-align: top;
+    padding: 0% 1% 2% 1%;
+
+}
+
+#EspaceConnexion h1,  #EspaceInscription h1{
+    color:#D0A42E;
+}
+
+#EspaceInscription h2 {
+    font-size: 15px;
+    color:#999999;
+}
+
+#EspaceInscription p, label{
+    font-size: 14px;
+    font-family:  'Century Gothic';    
+
+}
+

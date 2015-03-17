@@ -2,12 +2,14 @@
 <html lang="fr">  
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="styles.css" media="all">	
+        <link rel="stylesheet" type="text/css" href="general.css" media="all">
+        <link rel="stylesheet" type="text/css" href="connexion.css" media="all">	
     </head>  
     
     <body>
     
         <?php include("entete.php");?>
+        <?php include("menuaccueil.php");?>
                     
         
             <div id="login">

@@ -1,0 +1,42 @@
+/***********/
+/* Galerie */
+/***********/
+#galerie{
+    background-color: black;
+    height: auto;
+    margin: 0% 15%;
+    width: 70%;
+}
+
+/***************/
+/* Le Carousel */
+/***************/
+
+/*Chargement des images pour carousel*/
+#owl-demo {
+	position:relative;
+    margin-top:45px;
+	
+    }
+
+#owl-demo .item img{
+    display: block;
+    width: 100%;
+    height: auto;
+    }
+
+/*Positionnement des boutons de carousel*/
+.owl-theme .owl-controls .owl-buttons div {
+	position: absolute;	
+}
+
+/*Boutons de gauche et de droite */
+.owl-theme .owl-controls .owl-buttons .owl-prev{
+	left: -45px;
+	top: 275px;
+}
+.owl-theme .owl-controls .owl-buttons .owl-next{
+right: -45px;
+top: 275px;
+}
+
