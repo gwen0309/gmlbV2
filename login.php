@@ -15,12 +15,12 @@
             <div id="login">
                 <div id="EspaceConnexion"> 
                     <h1> Connexion </h1>
-                    <form method="post">
-                        <label> Adresse email : </label>
-                        <input type ="mail" placeholder="Saisir votre mail" />  <br/>
+                    <form action="connexion.php" method="post">
+                        <label> Login : </label>
+                        <input type ="text" name="login" placeholder="Saisir votre login" />  <br/>
                         
                         <label> Mot de passe : </label>
-                        <input type ="password" placeholder="Saisir votre mot de passe" /> <br/>
+                        <input type ="password" name="password" placeholder="Saisir votre mot de passe" /> <br/>
                     
                         <input type="submit" value="Connexion" name="validationConnexion"/>
                     </form>
