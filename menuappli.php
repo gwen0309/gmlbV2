@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+session_start();
+?>
 <html lang="fr">  
     <head>
             <link rel="stylesheet" type="text/css" href="styles.css" media="all"> <!-- A modifier par menuhorizontal.css-->
