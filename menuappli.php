@@ -11,10 +11,8 @@ session_start();
     <body>
         <nav> 
             <ul id="menu">
-                <li> <a href="#">Gestion des hébergements</a></li>
+                <li> <a href="index_hebergement.html">Gestion des hébergements</a></li>
                 <li> <a href="#">Gestion des projections</a></li>
-                <li> <a href="#"></a></li>
-                <li> <a href="#"></a></li>
             </ul>
         </nav>
     </body>

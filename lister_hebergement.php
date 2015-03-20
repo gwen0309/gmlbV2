@@ -15,9 +15,7 @@
         <div>
             <ul class="menu-vertical">
                 <li class="mv-item"><a href="caracteristique.php">Ajouter</a></li>
-                <li class="mv-item"><a href="#">Modifier</a></li>
-                <li class="mv-item"><a href="lister_hebergement.php">Lister</a></li>
-                <li class="mv-item"><a href="#">test4</a></li>
+    			<li class="mv-item"><a href="lister_hebergement.php">Lister</a></li>
             </ul>
         </div>
 
@@ -28,15 +26,14 @@
             $bdd = "filrouge";
             $password  = "";
             // Connexion au serveur
-            $con = mysqli_connect($host, $user, $password);
-            mysqli_select_db($con, $bdd) or die("erreur lors de la selection de la bd");
+            $con = mysqli_connect($host, $user, $password) or die ("Erreur de connexion au serveur");
+            mysqli_select_db($con, $bdd) or die("Erreur lors de la selection de la bd");
             // Creation et envoi de la requete
             $query = "SELECT ID_HEBERGEMENT, NOM_HEBERGEMENT, TEL_HEBERGEMENT, CAPACITE_HEBERGEMENT, NOMBRE_ETOILES FROM HEBERGEMENT ORDER BY ID_HEBERGEMENT";
-            //Test de la requète et affichage de la requète
             ?>
 
             <table id="liste_hebergement">
-                            <tr>
+                    <tr>
                     <th>Nom de l'hébergement</th>
                     <th>Numéro de téléphone</th>
                     <th>Places disponible</th>
@@ -67,14 +64,15 @@
                             </tr>
                             ";
                 }
-                    mysqli_free_result($result);
               }
             else
                     {
                             printf("Erreur lors de l'execution de la requète");
                     }
-            // Free result set
-            mysqli_close($con);
+            // Libère la mémoire associée au résultat
+			mysqli_free_result($result);
+			// Fermeture de la connexion a la base de donnée
+			mysqli_close($con);
             ?> 
             </table>
 

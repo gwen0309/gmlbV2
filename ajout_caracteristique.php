@@ -16,24 +16,24 @@ $bdd = "filrouge";
 $password  = "";
 
 // Connexion au serveur
-$con = mysqli_connect($host, $user, $password);
-mysqli_select_db($con, $bdd) or die("erreur lors de la selection de la bd");
+$con = mysqli_connect($host, $user, $password) or die ("Erreur de connexion au serveur");
+mysqli_select_db($con, $bdd) or die("Erreur lors de la selection de la bd");
 
-$nom=$_GET['nom_hebergement'];
-$tel=$_GET['telephone'];
-$capa=$_GET['capacite'];
-$etoile=$_GET['etoile'];
-$rib=$_GET['RIB'];
-$num_rue=$_GET['numero_rue'];
-$nom_rue=$_GET['nom_rue']; 
-$cp=$_GET['CP'];
-$ville=$_GET['ville'];
-$prenom_contact=$_GET['prenom_contact']; 
-$nom_contact=$_GET['nom_contact'];
-$mail=$_GET['mail_contact'];
-$tel_contact=$_GET['telephone_contact'];
-$type_heberg=$_GET['type'];
-$service_heberg=$_GET['service']; 
+$nom= mysqli_real_escape_string($con, $_POST['nom_hebergement']);
+$tel= mysqli_real_escape_string($con, $_POST['telephone']);
+$capa= mysqli_real_escape_string($con, $_POST['capacite']);
+$etoile= mysqli_real_escape_string($con, $_POST['etoile']);
+$rib= mysqli_real_escape_string($con, $_POST['RIB']);
+$num_rue= mysqli_real_escape_string($con, $_POST['numero_rue']);
+$nom_rue= mysqli_real_escape_string($con, $_POST['nom_rue']); 
+$cp= mysqli_real_escape_string($con, $_POST['CP']);
+$ville= mysqli_real_escape_string($con, $_POST['ville']);
+$prenom_contact= mysqli_real_escape_string($con, $_POST['prenom_contact']); 
+$nom_contact= mysqli_real_escape_string($con, $_POST['nom_contact']);
+$mail= mysqli_real_escape_string($con, $_POST['mail_contact']);
+$tel_contact= mysqli_real_escape_string($con, $_POST['telephone_contact']);
+$type_heberg= mysqli_real_escape_string($con, $_POST['type']);
+$service_heberg=($_POST['service']); 
 
 // Test champs formulaire
 if (empty($nom)) 
@@ -106,12 +106,6 @@ else if (empty($type_heberg))
 	echo'<script>alert("Saisissez un type hébergement !"); document.location.href="caracteristique.php";</script>';
 	exit;
 }
-/*else if(empty($service_heberg))
-{
-   echo "Aucune checkbox n'a été cochée";
-   exit;
-} */
-
 // Creation et envoi de la requete
 $query = "INSERT INTO HEBERGEMENT (NOM_HEBERGEMENT, TEL_HEBERGEMENT, CAPACITE_HEBERGEMENT, NOMBRE_ETOILES, RIB, NUMERO_RUE_HEBERGEMENT, RUE_HEBERGEMENT, CODE_POSTAL_HEBERGEMENT, VILLE_HEBERGEMENT, NOM_CONTACT, PRENOM_CONTACT, MAIL_CONTACT, TEL_CONTACT, TYPE_HEBERGEMENT)
 VALUES('$nom', '$tel', '$capa', '$etoile', '$rib', '$num_rue', '$nom_rue', '$cp', '$ville', '$nom_contact','$prenom_contact', '$mail', '$tel_contact', '$type_heberg');"; 
@@ -128,25 +122,22 @@ if ($result=mysqli_query($con,$query2))
   }
 if (isset($service_heberg))
 {
-foreach ($service_heberg as $key => $value)
-{
-	$query3="INSERT INTO PROPOSER (ID_HEBERGEMENT, ID_SERVICE) VALUES ('$ID_H', '$value');";
-	mysqli_query ($con, $query3)or die ('Erreur SQL !'.$query3.'<br />'.mysqli_error($query3));
+	foreach ($service_heberg as $key => $value)
+	{
+		$query3="INSERT INTO PROPOSER (ID_HEBERGEMENT, ID_SERVICE) VALUES ('$ID_H', '$value');";
+		mysqli_query ($con, $query3)or die ('Erreur SQL !'.$query3.'<br />'.mysqli_error($query3));
+	}
 }
-}
-//select pour recup id hebergement 
-// recupérer id service et insérer dans proposer 
-//insérer id hébergement dans proposer 
-
-
-//On ferme la connexion à la base de donnée
+// Libère la mémoire associée au résultat
+mysqli_free_result($result);
+// Fermeture de la connexion a la base de donnée
 mysqli_close($con);
+
+// Fenêtre Pop up de fermeture
 echo'<script>
 alert("Ajout Réussi !!");
 document.location.href="caracteristique.php";
 </script>';
-
-
 ?>
 
 </body>

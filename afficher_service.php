@@ -5,7 +5,7 @@
         <link rel="stylesheet" type="text/css" href="general.css" media="all">
         <link rel="stylesheet" type="text/css" href="menuvertical.css" media="all">
         <link rel="stylesheet" type="text/css" href="styles.css" media="all"> <!-- Qui sera a supprimer-->       
-        <title> Lister Hébergement</title>	
+        <title> Liste des Services</title>	
     </head>  
 
     <body>
@@ -16,9 +16,7 @@
         <div>
             <ul class="menu-vertical">
                 <li class="mv-item"><a href="caracteristique.php">Ajouter</a></li>
-                <li class="mv-item"><a href="#">Modifier</a></li>
-                <li class="mv-item"><a href="lister_hebergement.php">Lister</a></li>
-                <li class="mv-item"><a href="#">test4</a></li>
+    			<li class="mv-item"><a href="lister_hebergement.php">Lister</a></li>
             </ul>
         </div>
         <div id="caracteristics">
@@ -28,19 +26,18 @@
             $bdd = "filrouge";
             $password  = "";
             //Récupération de la variable
-            $ID=$_GET['ID_H'];
+            $ID= mysqli_real_escape_string($con, $_POST['ID_H']);
             // Connexion au serveur
-            $con = mysqli_connect($host, $user, $password);
-            mysqli_select_db($con, $bdd) or die("erreur lors de la selection de la bd");
+            $con = mysqli_connect($host, $user, $password) or die ("Erreur de connexion au serveur");
+            mysqli_select_db($con, $bdd) or die("Erreur lors de la selection de la bd");
             // Creation et envoi de la requete
             $query = "SELECT NOM_SERVICE FROM PROPOSER P
             INNER JOIN HEBERGEMENT H ON H.ID_HEBERGEMENT = P.ID_HEBERGEMENT
             INNER JOIN SERVICE S ON S.ID_SERVICE = P.ID_SERVICE 
             WHERE P.ID_HEBERGEMENT LIKE '".$ID."'";
-            //Test de la requète
             ?>
             <table id="liste_service">
-                            <tr>
+                    <tr>
                     <th>Services proposés</th>
                     </tr>
             <?php
@@ -55,13 +52,15 @@
                             </tr>
                             ";
                 }
-                    mysqli_free_result($result);
               }
             else
                     {
                             printf("Erreur lors de l'execution de la requète");
                     }
-            mysqli_close($con);
+            // Libère la mémoire associée au résultat
+			mysqli_free_result($result);
+			// Fermeture de la connexion a la base de donnée
+			mysqli_close($con);
             ?> 
             </table>
 

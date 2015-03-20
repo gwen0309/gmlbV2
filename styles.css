@@ -8,8 +8,6 @@
         background: #111;
 		border-top: 15px solid black; /* Decale le menu de 15px vers le haut */
 		font: bold 15px/25px Arial, Helvetica;
-		
-  
 }
 
 #menu li{
@@ -25,29 +23,23 @@
         color: #999;
         text-transform: uppercase;
         text-decoration: none;
-        /*text-shadow: 0 1px 0 #000;*/
-		
 		font: bold 12px/25px Arial, Helvetica;
-		margin: 1px 0; /* espace les liens d'1 px */
-  		/*padding: 8px 10px; /* marges internes pour aérer */ 
-  		color: #999;
+		margin: 1px 0;
+		color: #999;
   		background: #111;
-  		text-decoration: none; /* on vire le soulignement */
-
-	   /* on définit la transition pour les navigateurs */
-	   -webkit-transition: all .3s; /* Chrome/Safari */
-	   -moz-transition: all .3s; /* Firefox (plus trop nécessaire) */
-	   transition: all .3s; /* syntaxe officielle */
+  		text-decoration: none;
+	   -webkit-transition: all .3s; 
+	   -moz-transition: all .3s;
+	   transition: all .3s;
 }
 
 #menu li:hover > a{
-        /*color: #fafafa;*/
 		background: #E9C200;
   		color: #FFF;
-  		padding-left: 30px; /* décalage du contenu de 10px vers la droite (30-20 = 10) */
+  		padding-left: 30px; 
 }
 
-*html #menu li a:hover{ /* IE6 */
+*html #menu li a:hover{
         color: #fafafa;
 }
 
@@ -152,12 +144,10 @@
 /* TEST MENU VERTICAL */
 
 /* style du bloc ul */
-.menu-vertical
-{
-  width: 250px; /* optionnel, c'est pour la démo */
-  list-style: none; /* supprime les puces de liste */
-  padding: 4px; /* on fait un peu de place autour des liens */
-  margin: 0; /* on annule les marges */
+.menu-vertical{
+  list-style: none;
+  padding: 4px;
+  margin: 0;
   background: black;
   font: bold 15px/25px Arial, Helvetica;
   float: left;
@@ -165,41 +155,30 @@
   height:850px;
 }
  
-/* styles des liens et éléments de liste */
-.mv-item,.mv-item a
-{
-  /* les liens et item deviennent des blocs */
-  /* suffit théoriquement à virer les puces de liste */
+.mv-item,.mv-item a{
   display: block;
 }
  
 /* styles des liens */
-.mv-item a
-{
-  margin: 1px 0; /* espace les liens d'1 px */
-  padding: 8px 20px; /* marges internes pour aérer */ 
+.mv-item a{
+  margin: 1px 0;
+  padding: 8px 20px;
   color: #999;
   background: #111;
-  text-decoration: none; /* on vire le soulignement */
-
-  /* on définit la transition pour les navigateurs */
+  text-decoration: none;
   -webkit-transition: all .3s; /* Chrome/Safari */
   -moz-transition: all .3s; /* Firefox (plus trop nécessaire) */
   transition: all .3s; /* syntaxe officielle */
 }
  
 /* styles changeants au survol et focus */
-.mv-item a:hover, .mv-item a:focus
-{
+.mv-item a:hover, .mv-item a:focus{
   background: #E9C200;
   color: #FFF;
-  padding-left: 30px; /* décalage du contenu de 10px vers la droite (30-20 = 10) */
+  padding-left: 30px;
 }
 
-
-/* Rétablissement du flottement */
-#menu:after
-{
+#menu:after{
 	visibility: hidden;
     display: block;
     font-size: 0;
@@ -212,8 +191,7 @@
 *:first-child+html #menu { zoom: 1; } /* IE7 */
 
 /* Caractéristiques */
-#caracteristics
-{
+#caracteristics{
 	width:600px;
 	height:400px;
 	font: bold 15px/25px Arial, Helvetica;
@@ -222,8 +200,7 @@
 }
 
 /*Style des div*/
-#general, #service, #adresse, #contact
-{
+#general, #service, #adresse, #contact{
 	font-family:  'Century Gothic';    
     background-color: white;
     color:black;
@@ -238,31 +215,29 @@
 	
 }
 
-#liste_hebergement
-{
+#liste_hebergement{
 	border-collapse: collapse;
 	font-family:  'Century Gothic';    
     background-color: black;
     color:white;
     border-radius: 15px;
     display: inline-block;
-    margin: 29px 12% 0 5%;
+    margin: 33px 12% 0 5%;
     text-align: left;
-    width: 170%;
+    width: 174%;
     height: auto;
     vertical-align: top;
     padding: 3px 3% 2% 2%;
 }
 
-#liste_contact, #liste_service, #liste_adresse
-{
+#liste_contact, #liste_service, #liste_adresse{
 	border-collapse: collapse;
 	font-family:  'Century Gothic';    
     background-color: black;
     color:white;
     border-radius: 15px;
     display: inline-block;
-    margin: 29px 12% 0 5%;
+    margin: 32px 12% 0 5%;
     text-align: left;
     width: 139%;
     height: auto;
@@ -270,18 +245,19 @@
     padding: 10px 3% 2% 2%;
 }
 
-#liste_hebergement a
-{
+#liste_hebergement a{
 	text-decoration: underline;
 }
 
-td, th, tr
-{
+td, th, tr{
 	border: thin solid #CBCBCB;
 	width: auto; 
-	padding: 5px; 
-	text-align: center; 
+	padding: 5px;  
 	width: 15%; 
+}
+
+th{
+	text-align:center;
 }
 
 

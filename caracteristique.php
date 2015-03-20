@@ -17,9 +17,7 @@
         <div>
             <ul class="menu-vertical">
                 <li class="mv-item"><a href="caracteristique.php">Ajouter</a></li>
-                <li class="mv-item"><a href="#">Modifier</a></li>
-                <li class="mv-item"><a href="lister_hebergement.php">Lister</a></li>
-                <li class="mv-item"><a href="#">test4</a></li>
+    			<li class="mv-item"><a href="lister_hebergement.php">Lister</a></li>
             </ul>
         </div>
 
@@ -32,16 +30,15 @@
         $password  = "";
 
         // Connexion au serveur
-        $con = mysqli_connect($host, $user, $password);
-        mysqli_select_db($con, $bdd) or die("erreur lors de la selection de la bd");
+        $con = mysqli_connect($host, $user, $password)or die ("Erreur de connexion au serveur");
+        mysqli_select_db($con, $bdd) or die("Erreur lors de la selection de la bd");
         $query = "SELECT ID_SERVICE, NOM_SERVICE FROM SERVICE;"; 
-
+		$result=mysqli_query($con,$query) or die ('Erreur SQL !'.$query.'<br />'. mysqli_error($query));
         ?>
-
         <div id="caracteristics">
                 <div id="general">
                         <h3> Veuillez saisir les caractéistiques du nouvel hébergement </h3>
-                        <form action="ajout_caracteristique.php" method="GET">     	
+                        <form action="ajout_caracteristique.php" method="POST">     	
                         <h3>Caractéristiques générales</h3>
                                 <label>Nom de l'hébergement :</label>  <input type="text" name="nom_hebergement" required/><br/>
                         <label>Numéros de téléphone :</label>  <input type="tel" name="telephone" required/><br/>
@@ -61,15 +58,16 @@
         <div id="service">
         <h3>Ajout service</h3>        
         <?php
-        $result=mysqli_query($con,$query);
             while ($row = mysqli_fetch_array($result))
                 {
                         echo"<input type='checkbox' name='service[]' value='{$row['ID_SERVICE']}'>"  .$row['NOM_SERVICE'];
                         echo"<br/>";
-            }
+            	}
                 
-                mysqli_free_result($result);
-                mysqli_close($con);
+        // Libère la mémoire associée au résultat
+		mysqli_free_result($result);
+		// Fermeture de la connexion a la base de donnée
+		mysqli_close($con);
         ?>
         </div>
             <br>
@@ -89,11 +87,7 @@
                 <label>Téléphone du contact :</label> <input type="tel" name="telephone_contact" required/><br/>
                 <label><input type="submit" value="Envoyer">
                 </form>
-        <div>
-                
-
-
-        </div>
+       </div>
 
     </body>
 </html>
