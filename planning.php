@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <script type="text/javascript" src="scripts/jquery.min.js"></script> 	
-  <script type="text/javascript" src="scripts/ongletJs.js"></script>  
+  <script type="text/javascript" src="scripts/ProjectionJS.js"></script>  
   <link rel="stylesheet" href="styles/stylesOnglet.css" type="text/css" />	 
 
 </head>
@@ -32,7 +32,7 @@ mysql_connect($host, $user,$password) or die("erreur de connexion au serveur");
 mysql_select_db($bdd) or die("erreur de connexion a la base de donnees");
 
 
-$querydate= "select NOM_FILM, NOM_SALLE, TIME(DATE_DEBUT_PROJECTION), TIME(DATE_FIN_PROJECTION), DATE(DATE_DEBUT_PROJECTION), CATEGORIE FROM projeter p 
+$querydate= "select NOM_FILM, NOM_SALLE, TIME(DATE_DEBUT_PROJECTION), TIME(DATE_FIN_PROJECTION), DATE(DATE_DEBUT_PROJECTION), f.ID_FILM, CATEGORIE FROM projeter p 
 INNER JOIN films f ON f.ID_FILM = p.ID_FILM  INNER JOIN salle s ON s.ID_SALLE = p.ID_SALLE ORDER BY NOM_FILM";
 $result = mysql_query($querydate);
 
@@ -50,6 +50,11 @@ $b++;
 }
 
 while($row = mysql_fetch_array($result)){
+$idf[$i] =	$row['ID_FILM'];
+$resultfilm = mysql_query("SELECT N__JURY FROM jury j INNER JOIN juger j2 ON j.ID_INDIVIDU = j2.ID_INDIVIDU WHERE ID_FILM = '$idf[$i]'");
+while($array = mysql_fetch_array($resultfilm)){
+$jury[$i] = $array['N__JURY'];
+}
 $Nomsp[$i] =	$row['NOM_SALLE'];
 $Nomf[$i] = $row['NOM_FILM'];
 $DateDeb[$i] = $row['TIME(DATE_DEBUT_PROJECTION)'];
@@ -103,7 +108,12 @@ for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
 							
 							if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00"){
 								$compt++;
+								if(isset($jury[$j]))
+								{
+								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+								}else{
 								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+								}
 											}
 				
 						}
@@ -128,7 +138,12 @@ for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
 					
 					if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00"){
 						$compt++;
-						echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+							if(isset($jury[$j]))
+								{
+								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+								}else{
+								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+								}
 									}
 		
 				}
@@ -150,7 +165,12 @@ for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
 				if( $Nomsp[$j]==$Noms[$h]){
 					if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00"){
 						$compt++;
-						echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+							if(isset($jury[$j]))
+								{
+								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+								}else{
+								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+								}
 									}
 		
 				}
@@ -171,7 +191,12 @@ for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
 				if( $Nomsp[$j]==$Noms[$h]){
 					if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00"){
 						$compt++;
-						echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+							if(isset($jury[$j]))
+								{
+								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+								}else{
+								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+								}
 									}
 		
 				}
@@ -216,7 +241,12 @@ for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
 							
 							if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00" && $ca[$j]=="LM"){
 								$compt++;
+	if(isset($jury[$j]))
+								{
+								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+								}else{
 								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+								}
 											}
 				
 						}
@@ -241,7 +271,12 @@ for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
 					
 					if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00"&& $cat[$j]=="LM"){
 						$compt++;
-						echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+							if(isset($jury[$j]))
+								{
+								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+								}else{
+								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+								}
 									}
 		
 				}
@@ -263,7 +298,12 @@ for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
 				if( $Nomsp[$j]==$Noms[$h]){
 					if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00"&& $cat[$j]=="LM"){
 						$compt++;
-						echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+							if(isset($jury[$j]))
+								{
+								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+								}else{
+								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+								}
 									}
 		
 				}
@@ -284,7 +324,12 @@ for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
 				if( $Nomsp[$j]==$Noms[$h]){
 					if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00"&& $cat[$j]=="LM"){
 						$compt++;
-						echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+							if(isset($jury[$j]))
+								{
+								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+								}else{
+								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+								}
 									}
 		
 				}
@@ -330,7 +375,12 @@ for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
 							
 							if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00" && $cat[$j]=="CM"){
 								$compt++;
+									if(isset($jury[$j]))
+								{
+								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+								}else{
 								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+								}
 											}
 				
 						}
@@ -355,7 +405,12 @@ for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
 					
 					if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00"&& $cat[$j]=="CM"){
 						$compt++;
-						echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+							if(isset($jury[$j]))
+								{
+								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+								}else{
+								echo  "<td id='film".$compteur."'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+								}
 									}
 		
 				}

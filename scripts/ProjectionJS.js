@@ -19,3 +19,14 @@ $(document).ready(function() {
  
 	});
   });
+  
+  //fait apparaitre formulaire de l'adresse de livraison
+function montrer (box) {
+var a = document.getElementById('checkbox').checked;
+	if(a == true){
+	box.className="shown";
+	}
+	else{ 
+	box.className="hidden";
+	}
+}

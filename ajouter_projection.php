@@ -22,14 +22,26 @@ $film=$_POST['film'];
 $salle=$_POST['salle'];
 $datej=$_POST['datejour'];
 $tr=$_POST['tr'];
- 
+
+$j=0;
+if(isset($_POST['jury']))
+{
+	$jury=$_POST['jury'];
+	$resultjury = mysql_query("SELECT ID_INDIVIDU FROM jury WHERE N__JURY = '$jury'");
+	 while($array2 = mysql_fetch_array($resultjury)){
+	 $jure[$j] = $array2['ID_INDIVIDU'];
+	 $j++;
+	 
+	 }
+}
+
 $queryfilm= "SELECT DUREE, CATEGORIE FROM films WHERE ID_FILM = '$film'";
 $resultfilm = mysql_query($queryfilm);
 
  
- while($row = mysql_fetch_array($resultfilm)){
-$duree[0] = $row['DUREE'];
-$cat[0] = $row['CATEGORIE'];
+ while($array = mysql_fetch_array($resultfilm)){
+$duree[0] = $array['DUREE'];
+$cat[0] = $array['CATEGORIE'];
 
 }
 
@@ -109,7 +121,11 @@ for($a=0;$a<$z;$a++)
  /*-----Fin test--------------*/
 if($r==0){
 	$queryproj= "INSERT INTO projeter (ID_FILM, ID_SALLE, DATE_DEBUT_PROJECTION, DATE_FIN_PROJECTION) VALUES ($film,$salle,'".$datej."','".$datefin."')";
-				$insertion = mysql_query($queryproj);
+	$insertion = mysql_query($queryproj);
+	for($f=0;$f<$j;$f++)
+	{
+		$insertjury = mysql_query("INSERT INTO juger (ID_INDIVIDU, ID_FILM) values ($jure[$f],$film)");
+	}
 }
 else if($r>=9000)
 	{
