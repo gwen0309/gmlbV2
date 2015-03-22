@@ -1,1 +1,50 @@
 /* Menu Vertical*/
+
+/* TEST MENU VERTICAL */
+
+/* style du bloc ul */
+.menu-vertical{
+  list-style: none;
+  padding: 4px;
+  margin: 0;
+  background: black;
+  font: bold 15px/25px Arial, Helvetica;
+  float: left;
+  width:100px;
+  height:850px;
+}
+ 
+.mv-item,.mv-item a{
+  display: block;
+}
+ 
+/* styles des liens */
+.mv-item a{
+  margin: 1px 0;
+  padding: 8px 20px;
+  color: #999;
+  background: #111;
+  text-decoration: none;
+  -webkit-transition: all .3s; /* Chrome/Safari */
+  -moz-transition: all .3s; /* Firefox (plus trop nécessaire) */
+  transition: all .3s; /* syntaxe officielle */
+}
+ 
+/* styles changeants au survol et focus */
+.mv-item a:hover, .mv-item a:focus{
+  background: #E9C200;
+  color: #FFF;
+  padding-left: 30px;
+}
+
+#menu:after{
+	visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+* html #menu             { zoom: 1; } /* IE6 */
+*:first-child+html #menu { zoom: 1; } /* IE7 */
