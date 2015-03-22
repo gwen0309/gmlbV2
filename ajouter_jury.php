@@ -18,11 +18,11 @@ mysql_connect($host, $user,$password) or die("erreur de connexion au serveur");
 mysql_select_db($bdd) or die("erreur de connexion a la base de donnees");
 
 $film=$_POST['film'];
-echo $jury=$_POST['jury'];
+$jury=$_POST['jury'];
 $j=0;
 $resultjury = mysql_query("SELECT ID_INDIVIDU FROM jury WHERE N__JURY = '$jury'");
 while($array2 = mysql_fetch_array($resultjury)){
-echo $jure[$j] = $array2['ID_INDIVIDU'];
+$jure[$j] = $array2['ID_INDIVIDU'];
 $j++; 
 }
 

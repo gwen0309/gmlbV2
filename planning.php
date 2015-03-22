@@ -460,11 +460,10 @@ echo "</tr>";
 	
 <form action='ajout_projection.php' > 
 <input type='submit' value='Ajouter une projection'/>
-<input type="hidden" name="jour" value="">
-<input type="hidden" name="mois" value="">
-<input type="hidden" name="dr" value="">
+<input type="hidden" name="jourprem" value="">
+<input type="hidden" name="jourprem" value="">
+
 </form>
-<button>aa</button>
 
 </body>
 </html>
