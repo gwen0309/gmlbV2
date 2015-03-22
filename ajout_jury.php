@@ -25,13 +25,51 @@
     mysql_connect($host, $user,$password) or die("erreur de connexion au serveur");
     mysql_select_db($bdd) or die("erreur de connexion a la base de donnees");
 	
-	  $queryfilms = "SELECT NOM_FILM, N__JURY FROM films f INNER JOIN juger j ON j.ID_FILM=f.ID_FILM INNER JOIN jury jj ON jj.ID_INDIVIDU=j.ID_INDIVIDU ";
+	  $queryfilms = "SELECT NOM_FILM, ID_FILM FROM films WHERE id_film <> ALL (SELECT ID_FILM FROM juger)";
+	  $resultfilms=mysql_query($queryfilms);
+	  
+	$queryjury = "SELECT N__JURY, count(id_film) AS NB_FILM FROM jury j inner join juger jj on j.id_individu = jj.id_individu where j.id_individu = jj.id_individu group by j.id_individu  ";
+	$resultjury=mysql_query($queryjury);
 	
+	$p=0;
 	while($array = mysql_fetch_array($resultfilms)){
-    $idf[$p] = $array['ID_FILM'];
     $Nomf[$p] = $array['NOM_FILM'];
-    $Dureef[$p] = $array['DUREE'];
-    $Catf[$p] = $array['CATEGORIE'];
-
+	$idf[$p] = $array['ID_FILM'];
     $p++;
     }
+	
+	$r=0;
+	while($array2 = mysql_fetch_array($resultjury)){
+    $Numj[$r] = $array2['N__JURY'];
+	$nbfilm[$r] = $array2['NB_FILM'];
+    $r++;
+    }
+	?>
+	<div id="caracteristics">
+    <div id="general">
+	<form method='post' action='ajouter_jury.php' > 
+
+    <label>Nom des film qui n'ont pas jury associé :</label> 
+    <select name='film' required >"
+    <?php
+    for($o =0; $o< $p ;$o++){
+             echo "<option value='$idf[$o]'>$Nomf[$o]</option>";
+    }?>
+    </select></br>
+
+    <label>Numèro de jury disponible :</label> 
+    <select name='jury'  >
+    <?php
+    for($e =0; $e< $r ;$e++){
+             echo "<option value='$Numj[$e]'>Jury $Numj[$e] avec $nbfilm[$e] films à juger</option>";
+    }?>
+    </select></br>
+	
+    <input type='submit' value='Ajouter'>
+	<input type="button" value="Annuler" onclick="location.href='ajout_projection.php'" />
+    </div>
+    </div>
+	
+	    </form>
+    </body>
+</html>

@@ -109,6 +109,7 @@
     ?></select></br>
 	
     <input type='submit' value='Ajouter la projection'>
+	<input type="button" value="Annuler" onclick="location.href='planning.php'" />
     </div>
     </div>
 
