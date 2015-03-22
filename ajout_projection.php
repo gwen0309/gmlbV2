@@ -57,6 +57,11 @@
 
     <div id="caracteristics">
     <div id="general">
+	<form action='ajout_jury.php' > 
+	<input type='submit' value='Associer un jury à un film'/>
+
+	</form>
+	
     <form method='post' action='ajouter_projection.php'>
 
     <label>Nom du film :</label> 
@@ -71,7 +76,7 @@
     <select name='salle' required >
     <?php
     for($e =0; $e< $z ;$e++){
-             echo "<option value='$ids[$e]'>$Noms[$e]</option>";
+             echo "<option value='$ids[$e]'>$Noms[$e] et $ids[$e]</option>";
     }?>
     </select></br>
 

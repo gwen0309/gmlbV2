@@ -23,12 +23,26 @@ $salle=$_POST['salle'];
 $datej=$_POST['datejour'];
 $tr=$_POST['tr'];
 
+$j=0;
+if(isset($_POST['jury']))
+{
+	$jury=$_POST['jury'];
+	$resultjury = mysql_query("SELECT ID_INDIVIDU FROM jury WHERE N__JURY = '$jury'");
+	 while($array2 = mysql_fetch_array($resultjury)){
+	 $jure[$j] = $array2['ID_INDIVIDU'];
+	 $j++;
+	 
+	 }
+}
+
 $queryfilm= "SELECT DUREE, CATEGORIE FROM films WHERE ID_FILM = '$film'";
 $resultfilm = mysql_query($queryfilm);
+
  
  while($array = mysql_fetch_array($resultfilm)){
 $duree[0] = $array['DUREE'];
 $cat[0] = $array['CATEGORIE'];
+
 }
 
 /*-----Traitement date------*/
@@ -49,12 +63,13 @@ $datej = date('Y-m-d H:i:s', $date);
 if($tr=="oui")
 {
 $date2 = strtotime("+60 minutes", $date);
+
 }
 else
 {
 $date2 = strtotime("+30 minutes", $date);
-}
 
+}
 //durée du film
 $date = strtotime("+$duree[0] minutes", $date2);
 $datefin = date('Y-m-d H:i:s', $date);
