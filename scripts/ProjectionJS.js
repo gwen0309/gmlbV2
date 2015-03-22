@@ -9,7 +9,7 @@ $(document).ready(function() {
     });
 });
 
-//selectionne la case
+//selectionne la case et envoie
 $(document).ready(function(){
 	var aa;
 	var cell;
@@ -20,18 +20,13 @@ $(document).ready(function(){
 		$(element).removeClass('clicked');
 	} );
 	$(this).addClass('clicked');
-	/*alert('Voulez vous supprimer cette projection ?'+cell+' '+aa);
-	$.post('planning.php', {value: cell}, function(data) {
-	alert(data);
-	$(document).load(this);
-	});*/
 	});
-
-	$("#supprimer").click(function() {
-	  $('<form action="projection.php" method="POST">' + 
-		'<input type="hidden" name="value" value="' + cell + '">' +
-		'</form>').submit();
-	
-});
+	$("#modifier").on("click",function(event) {
+	 var form = $("<form action='projection.php' method='POST'>" + 
+		"<input type='hidden' name='value' value='" + cell + "'>" +
+		"</form>");
+		form.appendTo($('body'));
+		form.submit();
+	});
 });
   

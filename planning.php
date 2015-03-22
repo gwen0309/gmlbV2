@@ -468,7 +468,7 @@ echo "</tr>";
 <input type="hidden" name="jourprem" value="">
 </form>
 
-<button id="supprimer">Supprimer</button>
+<button id="modifier">Modifier</button>
 
 </body>
 </html>
