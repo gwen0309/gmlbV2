@@ -18,23 +18,62 @@
   
 include("entete.php");
 include("menuappli.php");
-  
+
+$host = "localhost";  
+$user = "root";
+$bdd = "filrouge";
+$password  = "";  
+
+mysql_connect($host, $user,$password) or die("erreur de connexion au serveur");
+mysql_select_db($bdd) or die("erreur de connexion a la base de donnees");
+
  /*--------A modifier chaque année-------*/
 $anneeD=15;
 $moisD=05;
 $jourD=13;
 $jourDS="jeudi";
-$duree=15;
-/*-----------------Fin--------------------*/
-  
-$host = "localhost";  
-$user = "root";
-$bdd = "filrouge";
-$password  = "";
+$duree=16;
 
-mysql_connect($host, $user,$password) or die("erreur de connexion au serveur");
-mysql_select_db($bdd) or die("erreur de connexion a la base de donnees");
+/*-------------Jours du festival--------------*/
+$dateD  = $anneeD.'-'.$moisD.'-'.$jourD;
+$date =  strtotime($dateD);
 
+for($jj=0;$jj<$duree;$jj++)
+{
+$date2 = strtotime("+$jj days", $date);
+$atamp=date('Y', $date2);
+$mtamp=date('m', $date2);
+$jtamp=date('d', $date2);
+$jourF[$jj] = $atamp.'-'.$mtamp.'-'.$jtamp;
+}
+
+//calcul du dimanche de relache
+if($jourDS=="lundi"){
+$date3 = strtotime("+6 days", $date);
+}
+else if ($jourDS=="mardi")
+{$date3 = strtotime("+5 days", $date);
+}
+else if ($jourDS=="mercredi")
+{$date3 = strtotime("+11 days", $date);
+}
+else if ($jourDS=="jeudi")
+{$date3 = strtotime("+10 days", $date);
+}
+else if ($jourDS=="vendredi")
+{$date3 = strtotime("+9 days", $date);
+}
+else if ($jourDS=="samedi")
+{$date3 = strtotime("+8 days", $date);
+}
+else if ($jourDS=="dimanche")
+{$date3 = strtotime("+7 days", $date);
+}
+
+$atamp=date('Y', $date3);
+$mtamp=date('m', $date3);
+$jtamp=date('d', $date3);
+$DR = $atamp.'-'.$mtamp.'-'.$jtamp;
 
 $querydate= "select NOM_FILM, NOM_SALLE, TIME(DATE_DEBUT_PROJECTION), TIME(DATE_FIN_PROJECTION), DATE(DATE_DEBUT_PROJECTION), f.ID_FILM, ID_PROJECTION, CATEGORIE FROM projeter p 
 INNER JOIN films f ON f.ID_FILM = p.ID_FILM  INNER JOIN salle s ON s.ID_SALLE = p.ID_SALLE ORDER BY NOM_FILM";
@@ -57,6 +96,7 @@ while($row = mysql_fetch_array($result)){
 $idp[$i] = $row['ID_PROJECTION'];
 $idf[$i] =	$row['ID_FILM'];
 $resultfilm = mysql_query("SELECT N__JURY FROM jury j INNER JOIN juger j2 ON j.ID_INDIVIDU = j2.ID_INDIVIDU WHERE ID_FILM = '$idf[$i]'");
+
 while($array = mysql_fetch_array($resultfilm)){
 $jury[$i] = $array['N__JURY'];
 }
@@ -65,6 +105,8 @@ $Nomf[$i] = $row['NOM_FILM'];
 $DateDeb[$i] = $row['TIME(DATE_DEBUT_PROJECTION)'];
 $DateFin[$i] = $row['TIME(DATE_FIN_PROJECTION)'];
 $jourDebut[$i] = $row['DATE(DATE_DEBUT_PROJECTION)'];
+$datetamp =  strtotime($jourDebut[$i]);
+$jourDebut[$i] = date('Y-m-d', $datetamp);
 $cat[$i] = $row['CATEGORIE'];
 $i++;
 }
@@ -99,119 +141,71 @@ echo "</tr>";
 
 
 for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
-	$jourP=$jour+$jourD;
 
-	if($jourP<10){
-			echo "<tr><td>Projection matin du 20$anneeD-$moisD-$jourP</td>";
-			for($h=0;$h<$b;$h++){	
-				$compt=0;
+	echo "<tr><td>Projection matin du $jourF[$jour]</td>";
+		for($h=0;$h<$b;$h++){	
+			$compt=0;
+			if($jourF[$jour]==$DR){
+				echo "<td>Jour de relache</td>";
+			}
+			else {
 				for( $j=0;$j<$i;$j++){
-					
-					if($jourDebut[$j]=="20".$anneeD."-0".$moisD."-0".$jourP){ 
-						
+					if($jourF[$jour]==$jourDebut[$j]){
 						if( $Nomsp[$j]==$Noms[$h]){
-							
 							if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00"){
 								$compt++;
 								if(isset($jury[$j]))
 								{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
 								}else{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
 								}
-											}
-				
+							}
 						}
-						
 					}
 				}
 				if($compt==0){
-					echo "<td></td>";
-					}	
-			}
-		
-	echo "</tr>";
-	}else{
-		echo "<tr><td>Projection matin du 20$anneeD-$moisD-$jourP</td>";
-	for($h=0;$h<$b;$h++){	
-		$compt=0;
-		for( $j=0;$j<$i;$j++){
-			
-			if($jourDebut[$j]=="20".$anneeD."-0".$moisD."-".$jourP){ 
-				
-				if( $Nomsp[$j]==$Noms[$h]){
-					
-					if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00"){
-						$compt++;
-							if(isset($jury[$j]))
-								{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
-								}else{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
-								}
-									}
-		
+				echo "<td></td>";
 				}
-				
 			}
 		}
-		if($compt==0){
-			echo "<td></td>";
-			}	
-	}
-	}
+
+
 	echo "</tr><tr>";
-	if($jourP<10){
-	echo "<tr><td>Projection AM du 20$anneeD-$moisD-$jourP</td>";
+
+	echo "<td>Projection AM du $jourF[$jour]</td>";
 	for($h=0;$h<$b;$h++){	
-		$compt=0;
-		for( $j=0;$j<$i;$j++){
-			if($jourDebut[$j]=="20".$anneeD."-0".$moisD."-0".$jourP){ 
-				if( $Nomsp[$j]==$Noms[$h]){
-					if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00"){
-						$compt++;
-							if(isset($jury[$j]))
-								{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
-								}else{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
-								}
-									}
-		
+	$compt=0;
+				if($jourF[$jour]==$DR){
+				echo "<td>Jour de relache</td>";
 				}
-			}
-		}
-		if($compt==0){
-		echo "<td></td>";
-		}
-	}
-	echo "</tr>";
-	}
-	else{
-	echo "<tr><td>Projection AM du 20$anneeD-$moisD-$jourP</td>";
-		for($h=0;$h<$b;$h++){	
-		$compt=0;
-		for( $j=0;$j<$i;$j++){
-			if($jourDebut[$j]=="20".$anneeD."-0".$moisD."-".$jourP){ 
-				if( $Nomsp[$j]==$Noms[$h]){
-					if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00"){
-						$compt++;
-							if(isset($jury[$j]))
-								{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
-								}else{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
-								}
+				
+				else {for( $j=0;$j<$i;$j++){
+					
+						if($jourDebut[$j]==$jourF[$jour]){ 
+							
+							if( $Nomsp[$j]==$Noms[$h]){
+								
+								if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00" ){
+									$compt++;
+									if(isset($jury[$j]))
+									{
+									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+									}else{
+									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
 									}
-		
+												}
+					
+							}
+							
+						}
+					}
+				if($compt==0){
+					echo "<td></td>";
+					}
 				}
-			}
-		}
-		if($compt==0){
-		echo "<td></td>";
-		}
 	}
-	}
+
 echo "</tr>";
 }
 	echo "</table>";
@@ -228,119 +222,71 @@ echo " <table width='800' ><tr>
 	<td>Salle $Noms[3]</td></tr>";
 
 for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
-	$jourP=$jour+$jourD;
 
-	if($jourP<10){
-			echo "<tr><td>Projection matin du 20$anneeD-$moisD-$jourP</td>";
-			for($h=0;$h<4;$h=$h+3){	
-				$compt=0;
+	echo "<tr><td>Projection matin du $jourF[$jour]</td>";
+		for($h=0;$h<4;$h+=3){	
+			$compt=0;
+			if($jourF[$jour]==$DR){
+				echo "<td>Jour de relache</td>";
+			}
+			else {
 				for( $j=0;$j<$i;$j++){
-					
-					if($jourDebut[$j]=="20".$anneeD."-0".$moisD."-0".$jourP){ 
-						
+					if($jourF[$jour]==$jourDebut[$j]){
 						if( $Nomsp[$j]==$Noms[$h]){
-							
-							if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00" && $ca[$j]=="LM"){
+							if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00"&& $cat[$j]=="LM"){
 								$compt++;
 								if(isset($jury[$j]))
 								{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
 								}else{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
 								}
-											}
-				
+							}
 						}
-						
 					}
 				}
 				if($compt==0){
-					echo "<td></td>";
-					}	
-			}
-		
-	echo "</tr>";
-	}else{
-		echo "<tr><td>Projection matin du 20$anneeD-$moisD-$jourP</td>";
-	for($h=0;$h<4;$h=$h+3){	
-		$compt=0;
-		for( $j=0;$j<$i;$j++){
-			
-			if($jourDebut[$j]=="20".$anneeD."-0".$moisD."-".$jourP){ 
-				
-				if( $Nomsp[$j]==$Noms[$h]){
-					
-					if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00"&& $cat[$j]=="LM"){
-						$compt++;
-							if(isset($jury[$j]))
-								{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
-								}else{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
-								}
-									}
-		
+				echo "<td></td>";
 				}
-				
 			}
 		}
-		if($compt==0){
-			echo "<td></td>";
-			}	
-	}
-	}
+
+
 	echo "</tr><tr>";
-	if($jourP<10){
-	echo "<tr><td>Projection AM du 20$anneeD-$moisD-$jourP</td>";
-	for($h=0;$h<4;$h=$h+3){	
-		$compt=0;
-		for( $j=0;$j<$i;$j++){
-			if($jourDebut[$j]=="20".$anneeD."-0".$moisD."-0".$jourP){ 
-				if( $Nomsp[$j]==$Noms[$h]){
-					if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00"&& $cat[$j]=="LM"){
-						$compt++;
-							if(isset($jury[$j]))
-								{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
-								}else{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
-								}
-									}
-		
+
+	echo "<td>Projection AM du $jourF[$jour]</td>";
+	for($h=0;$h<4;$h+=3){	
+	$compt=0;
+				if($jourF[$jour]==$DR){
+				echo "<td>Jour de relache</td>";
 				}
-			}
-		}
-		if($compt==0){
-		echo "<td></td>";
-		}
-	}
-	echo "</tr>";
-	}
-	else{
-	echo "<tr><td>Projection AM du 20$anneeD-$moisD-$jourP</td>";
-		for($h=0;$h<4;$h=$h+3){	
-		$compt=0;
-		for( $j=0;$j<$i;$j++){
-			if($jourDebut[$j]=="20".$anneeD."-0".$moisD."-".$jourP){ 
-				if( $Nomsp[$j]==$Noms[$h]){
-					if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00"&& $cat[$j]=="LM"){
-						$compt++;
-							if(isset($jury[$j]))
-								{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
-								}else{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
-								}
+				
+				else {for( $j=0;$j<$i;$j++){
+					
+						if($jourDebut[$j]==$jourF[$jour]){ 
+							
+							if( $Nomsp[$j]==$Noms[$h]){
+								
+								if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00"&& $cat[$j]=="LM"){
+									$compt++;
+									if(isset($jury[$j]))
+									{
+									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+									}else{
+									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
 									}
-		
+												}
+					
+							}
+							
+						}
+					}
+				if($compt==0){
+					echo "<td></td>";
+					}
 				}
-			}
-		}
-		if($compt==0){
-		echo "<td></td>";
-		}
 	}
-	}
+
 echo "</tr>";
 }
 	echo "</table>";
@@ -358,119 +304,70 @@ echo " <table width='800' ><tr>
 	<td>Salle $Noms[2]</td></tr>";
 
 for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
-	$jourP=$jour+$jourD;
-
-	if($jourP<10){
-			echo "<tr><td>Projection matin du 20$anneeD-$moisD-$jourP</td>";
-			for($h=1;$h<3;$h++){	
-				$compt=0;
+	echo "<tr><td>Projection matin du $jourF[$jour]</td>";
+		for($h=1;$h<3;$h++){	
+			$compt=0;
+			if($jourF[$jour]==$DR){
+				echo "<td>Jour de relache</td>";
+			}
+			else {
 				for( $j=0;$j<$i;$j++){
-					
-					if($jourDebut[$j]=="20".$anneeD."-0".$moisD."-0".$jourP){ 
-						
+					if($jourF[$jour]==$jourDebut[$j]){
 						if( $Nomsp[$j]==$Noms[$h]){
-							
-							if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00" && $cat[$j]=="CM"){
+							if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00"&& $cat[$j]=="CM"){
 								$compt++;
-									if(isset($jury[$j]))
+								if(isset($jury[$j]))
 								{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
 								}else{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
 								}
-											}
-				
+							}
 						}
-						
 					}
 				}
 				if($compt==0){
-					echo "<td></td>";
-					}	
-			}
-		
-	echo "</tr>";
-	}else{
-		echo "<tr><td>Projection matin du 20$anneeD-$moisD-$jourP</td>";
-	for($h=1;$h<3;$h++){	
-		$compt=0;
-		for( $j=0;$j<$i;$j++){
-			
-			if($jourDebut[$j]=="20".$anneeD."-0".$moisD."-".$jourP){ 
-				
-				if( $Nomsp[$j]==$Noms[$h]){
-					
-					if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00"&& $cat[$j]=="CM"){
-						$compt++;
-						if(isset($jury[$j]))
-								{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
-								}else{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
-								}
-									}
-		
+				echo "<td></td>";
 				}
-				
 			}
 		}
-		if($compt==0){
-			echo "<td></td>";
-			}	
-	}
-	}
+
+
 	echo "</tr><tr>";
-	if($jourP<10){
-	echo "<tr><td>Projection AM du 20$anneeD-$moisD-$jourP</td>";
+
+	echo "<td>Projection AM du $jourF[$jour]</td>";
 	for($h=1;$h<3;$h++){	
-		$compt=0;
-		for( $j=0;$j<$i;$j++){
-			if($jourDebut[$j]=="20".$anneeD."-0".$moisD."-0".$jourP){ 
-				if( $Nomsp[$j]==$Noms[$h]){
-					if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00"&& $cat[$j]=="CM"){
-						$compt++;
-						if(isset($jury[$j]))
-								{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
-								}else{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
-								}
-									}
-		
+	$compt=0;
+				if($jourF[$jour]==$DR){
+				echo "<td>Jour de relache</td>";
 				}
-			}
-		}
-		if($compt==0){
-		echo "<td></td>";
-		}
-	}
-	echo "</tr>";
-	}
-	else{
-	echo "<tr><td>Projection AM du 20$anneeD-$moisD-$jourP</td>";
-		for($h=1;$h<3;$h++){	
-		$compt=0;
-		for( $j=0;$j<$i;$j++){
-			if($jourDebut[$j]=="20".$anneeD."-0".$moisD."-".$jourP){ 
-				if( $Nomsp[$j]==$Noms[$h]){
-					if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00"&& $cat[$j]=="CM"){
-						$compt++;
-						if(isset($jury[$j]))
-								{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
-								}else{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
-								}
+				
+				else {for( $j=0;$j<$i;$j++){
+					
+						if($jourDebut[$j]==$jourF[$jour]){ 
+							
+							if( $Nomsp[$j]==$Noms[$h]){
+								
+								if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00"&& $cat[$j]=="CM"){
+									$compt++;
+									if(isset($jury[$j]))
+									{
+									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+									}else{
+									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
 									}
-		
+												}
+					
+							}
+							
+						}
+					}
+				if($compt==0){
+					echo "<td></td>";
+					}
 				}
-			}
-		}
-		if($compt==0){
-		echo "<td></td>";
-		}
 	}
-	}
+
 echo "</tr>";
 }
 	echo "</table>";
@@ -487,119 +384,70 @@ echo " <table width='800' ><tr>
 	<td>Salle $Noms[4]</td></tr>";
 
 for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
-	$jourP=$jour+$jourD;
-
-	if($jourP<10){
-			echo "<tr><td>Projection matin du 20$anneeD-$moisD-$jourP</td>";
-			for($h=1;$h<5;$h=$h+3){	
-				$compt=0;
+	echo "<tr><td>Projection matin du $jourF[$jour]</td>";
+		for($h=1;$h<5;$h+=3){	
+			$compt=0;
+			if($jourF[$jour]==$DR){
+				echo "<td>Jour de relache</td>";
+			}
+			else {
 				for( $j=0;$j<$i;$j++){
-					
-					if($jourDebut[$j]=="20".$anneeD."-0".$moisD."-0".$jourP){ 
-						
+					if($jourF[$jour]==$jourDebut[$j]){
 						if( $Nomsp[$j]==$Noms[$h]){
-							
-							if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00" && $cat[$j]=="UCR"){
+							if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00"&& $cat[$j]=="UCR"){
 								$compt++;
 								if(isset($jury[$j]))
 								{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
 								}else{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
 								}
-											}
-				
+							}
 						}
-						
 					}
 				}
 				if($compt==0){
-					echo "<td></td>";
-					}	
-			}
-		
-	echo "</tr>";
-	}else{
-		echo "<tr><td>Projection matin du 20$anneeD-$moisD-$jourP</td>";
-	for($h=1;$h<5;$h=$h+3){	
-		$compt=0;
-		for( $j=0;$j<$i;$j++){
-			
-			if($jourDebut[$j]=="20".$anneeD."-0".$moisD."-".$jourP){ 
-				
-				if( $Nomsp[$j]==$Noms[$h]){
-					
-					if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00"&& $cat[$j]=="UCR"){
-						$compt++;
-						if(isset($jury[$j]))
-								{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
-								}else{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
-								}
-									}
-		
+				echo "<td></td>";
 				}
-				
 			}
 		}
-		if($compt==0){
-			echo "<td></td>";
-			}	
-	}
-	}
+
+
 	echo "</tr><tr>";
-	if($jourP<10){
-	echo "<tr><td>Projection AM du 20$anneeD-$moisD-$jourP</td>";
-	for($h=1;$h<5;$h=$h+3){	
-		$compt=0;
-		for( $j=0;$j<$i;$j++){
-			if($jourDebut[$j]=="20".$anneeD."-0".$moisD."-0".$jourP){ 
-				if( $Nomsp[$j]==$Noms[$h]){
-					if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00"&& $cat[$j]=="UCR"){
-						$compt++;
-						if(isset($jury[$j]))
-								{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
-								}else{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
-								}
-									}
-		
+
+	echo "<td>Projection AM du $jourF[$jour]</td>";
+	for($h=1;$h<5;$h+=3){	
+	$compt=0;
+				if($jourF[$jour]==$DR){
+				echo "<td>Jour de relache</td>";
 				}
-			}
-		}
-		if($compt==0){
-		echo "<td></td>";
-		}
-	}
-	echo "</tr>";
-	}
-	else{
-	echo "<tr><td>Projection AM du 20$anneeD-$moisD-$jourP</td>";
-		for($h=1;$h<5;$h=$h+3){	
-		$compt=0;
-		for( $j=0;$j<$i;$j++){
-			if($jourDebut[$j]=="20".$anneeD."-0".$moisD."-".$jourP){ 
-				if( $Nomsp[$j]==$Noms[$h]){
-					if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00"&& $cat[$j]=="UCR"){
-						$compt++;
-						if(isset($jury[$j]))
-								{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
-								}else{
-								echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
-								}
+				
+				else {for( $j=0;$j<$i;$j++){
+					
+						if($jourDebut[$j]==$jourF[$jour]){ 
+							
+							if( $Nomsp[$j]==$Noms[$h]){
+								
+								if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00"&& $cat[$j]=="UCR"){
+									$compt++;
+									if(isset($jury[$j]))
+									{
+									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+									}else{
+									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
 									}
-		
+												}
+					
+							}
+							
+						}
+					}
+				if($compt==0){
+					echo "<td></td>";
+					}
 				}
-			}
-		}
-		if($compt==0){
-		echo "<td></td>";
-		}
 	}
-	}
+
 echo "</tr>";
 }
 	echo "</table>";
@@ -612,6 +460,9 @@ echo "</tr>";
 	
 <form action='ajout_projection.php' > 
 <input type='submit' value='Ajouter une projection'/>
+<input type="hidden" name="jour" value="">
+<input type="hidden" name="mois" value="">
+<input type="hidden" name="dr" value="">
 </form>
 <button>aa</button>
 
