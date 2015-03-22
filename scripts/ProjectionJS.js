@@ -12,21 +12,25 @@ $(document).ready(function() {
 //selectionne la case
   $(document).ready(function(){
  
-	$('table td').dblclick(function(){
+	$('table td').click(function(){
 		var cell = $(this).attr('id');
 		var aa = document.getElementById(cell).innerHTML;
-		alert('Cellule: '+aa);
- 
-	});
+		$(this).addClass('clicked').siblings().removeClass('clicked');
+		alert('Voulez vous supprimer cette projection ?'+cell+' '+aa);
+		});
+			
   });
   
-  //fait apparaitre formulaire de l'adresse de livraison
-function montrer (box) {
-var a = document.getElementById('checkbox').checked;
-	if(a == true){
-	box.className="shown";
-	}
-	else{ 
-	box.className="hidden";
-	}
-}
+$("button").on( 'click', function () {
+    $.ajax({
+        type: 'post',
+        url: 'http://localhost/aa/gmlbV2/supprimer.php',
+        data: {
+            proj: "some text"
+        },
+        success: function( data ) {
+            console.log( data );
+        }
+    });
+});
+

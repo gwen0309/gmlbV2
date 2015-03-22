@@ -24,8 +24,6 @@
 	width:260px;
 
 }
- 
-
 
 #lien_onglet li:hover {
 	border-top-color: #E9C200;
@@ -40,6 +38,7 @@
 
 /*Contenus des tables de l'onglet*/
 #contenu_onglet {
+	color: black;
 	padding:15px;
 	border-radius:3px;
 	box-shadow:-1px 1px 1px rgba(0,0,0,0.15);
@@ -52,4 +51,8 @@
 
 .contenu.active {
 	display:block;
+}
+
+.clicked{
+background:red;
 }

@@ -28,11 +28,9 @@
     $querydate= "select NOM_FILM, TIME(DATE_DEBUT_PROJECTION), TIME(DATE_FIN_PROJECTION), DATE(DATE_DEBUT_PROJECTION) FROM projeter p INNER JOIN films f WHERE f.ID_FILM = p.ID_FILM ORDER BY NOM_FILM";
     $result = mysql_query($querydate);
 
-	$queryjury = "SELECT DISTINCT N__JURY FROM jury";
     $queryfilms = "SELECT * FROM films";
     $querysalles = "SELECT * FROM salle ";
 
-    $resultjury = mysql_query($queryjury);
 	$resultfilms = mysql_query($queryfilms);
     $resultsalles = mysql_query($querysalles);
 
@@ -54,11 +52,7 @@
      $Noms[$z] = $array2['NOM_SALLE'];
     $z++;
     }
-	
-	while($array3 = mysql_fetch_array($resultjury)){
-    $jury[$ju] = $array3['N__JURY'];
-    $ju++;
-    }
+
     ?>
 
     <div id="caracteristics">
@@ -108,19 +102,6 @@
              echo "<option value=$min>$min</option>";
         }	
     ?></select></br>
-	<label >Associer un jury à ce film </label>  
-	<input class="checkbox" type="checkbox" name="checkbox" id="checkbox" value="oui" onclick="montrer(document.getElementById('form2'))">                   
-    <label class="formlabel">oui </label></br>  
-	
-	<div id="form2" class="hidden">		
-	<label>Numéro de jury :</label> 
-	 <select name='jury' >
-    <?php
-    for($f =0; $f< $ju ;$f++){
-             echo "<option value='$jury[$f]'>$jury[$f]</option>";
-    }?>
-    </select></br>
-	</div>		
 	
     <input type='submit' value='Ajouter la projection'>
     </div>

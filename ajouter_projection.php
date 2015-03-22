@@ -2,11 +2,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Ajout des projections</title>
 </head>
 
 <body>
-  
-
 
   <?php 
 $host = "localhost";  
@@ -91,31 +91,39 @@ $z++;
 
 for($a=0;$a<$z;$a++)
 {
-	if( $jourproj==$jourtest[$a]){		
-		if( $heureproj>= "08:00:00" && $heureproj<= "12:59:00")
-		{		
-			if( $heuretest[$a]>= "08:00:00" && $heuretest[$a]<= "12:59:00")
+	if((($salle=="1" || $salle=="4") && $cat[$a]=="LM")
+		||($salle=="2" && ($cat[$a]=="UCR"|| $cat[$a]=="CM"))
+		||($salle=="3" &&$cat[$a]=="CM")
+		||($salle=="4" &&$cat[$a]=="UCR")){
+		if( $jourproj==$jourtest[$a]){		
+			if( $heureproj>= "08:00:00" && $heureproj<= "12:59:00")
+			{		
+				if( $heuretest[$a]>= "08:00:00" && $heuretest[$a]<= "12:59:00")
+				{
+				if($tr!="oui")
+					{
+					$r++;
+					}
+					else{
+					$r=9000;
+					}
+				}
+
+			}
+			else if( $heureproj>= "16:00:00" && $heureproj<= "23:59:00")
 			{
-			if($tr!="oui")
+				if( $heuretest[$a]>= "16:00:00" && $heuretest[$a]<= "23:59:00")
 				{
 				$r++;
 				}
-				else{
-				$r=9000;
-				}
+						
 			}
+		}
 
-		}
-		else if( $heureproj>= "16:00:00" && $heureproj<= "23:59:00")
-		{
-			if( $heuretest[$a]>= "16:00:00" && $heuretest[$a]<= "23:59:00")
-			{
-			$r++;
-			}
-					
-		}
 	}
-
+	else {
+	$r=5000;
+	}
 }
  }
  /*-----Fin test--------------*/
@@ -126,16 +134,29 @@ if($r==0){
 	{
 		$insertjury = mysql_query("INSERT INTO juger (ID_INDIVIDU, ID_FILM) values ($jure[$f],$film)");
 	}
+	echo'<script>
+alert("Projection ajoutée");
+document.location.href="planning.php";
+</script>';
+}else if($r>=5000)
+	{
+		echo'<script>
+alert("Salle non appropriée pour le film");
+document.location.href="ajout_projection.php";
+</script>';
 }
 else if($r>=9000)
 	{
-	echo "pas de tapis rouge le matin !";
+		echo'<script>
+alert("Pas de tapis rouge le matin");
+document.location.href="ajout_projection.php";
+</script>';
 }else{
-	echo "pas bon";
+	echo'<script>
+alert("Ajout Réussi !!");
+document.location.href="ajout_projection.php";
+</script>';
 }
- 
-
-
   ?>
   </body>
   </html>
