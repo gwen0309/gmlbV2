@@ -10,27 +10,28 @@ $(document).ready(function() {
 });
 
 //selectionne la case
-  $(document).ready(function(){
- 
+$(document).ready(function(){
+	var aa;
+	var cell;
 	$('table td').click(function(){
-		var cell = $(this).attr('id');
-		var aa = document.getElementById(cell).innerHTML;
-		$(this).addClass('clicked').siblings().removeClass('clicked');
-		alert('Voulez vous supprimer cette projection ?'+cell+' '+aa);
-		});
-			
-  });
-  
-$("button").on( 'click', function () {
-    $.ajax({
-        type: 'post',
-        url: 'http://localhost/aa/gmlbV2/supprimer.php',
-        data: {
-            proj: "some text"
-        },
-        success: function( data ) {
-            console.log( data );
-        }
-    });
-});
+	cell = $(this).attr('id');
+	aa = document.getElementById(cell).innerHTML;
+	$(this).parents('table').find('td').each( function( index, element ) {
+		$(element).removeClass('clicked');
+	} );
+	$(this).addClass('clicked');
+	/*alert('Voulez vous supprimer cette projection ?'+cell+' '+aa);
+	$.post('planning.php', {value: cell}, function(data) {
+	alert(data);
+	$(document).load(this);
+	});*/
+	});
 
+	$("#supprimer").click(function() {
+	  $('<form action="projection.php" method="POST">' + 
+		'<input type="hidden" name="value" value="' + cell + '">' +
+		'</form>').submit();
+	
+});
+});
+  

@@ -27,6 +27,10 @@ $password  = "";
 mysql_connect($host, $user,$password) or die("erreur de connexion au serveur");
 mysql_select_db($bdd) or die("erreur de connexion a la base de donnees");
 
+if (isset($_POST['value']))
+{
+echo $ida=$_POST['value'];
+}
  /*--------A modifier chaque année-------*/
 $anneeD=15;
 $moisD=05;
@@ -156,9 +160,9 @@ for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
 								$compt++;
 								if(isset($jury[$j]))
 								{
-									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+									echo  "<td class='case' id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
 								}else{
-									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+									echo  "<td class='case' id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
 								}
 							}
 						}
@@ -190,9 +194,9 @@ for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
 									$compt++;
 									if(isset($jury[$j]))
 									{
-									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+									echo  "<td class='case' id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
 									}else{
-									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+									echo  "<td class='case' id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
 									}
 												}
 					
@@ -237,9 +241,9 @@ for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
 								$compt++;
 								if(isset($jury[$j]))
 								{
-									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+									echo  "<td class='case' id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
 								}else{
-									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+									echo  "<td class='case' id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
 								}
 							}
 						}
@@ -271,9 +275,9 @@ for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
 									$compt++;
 									if(isset($jury[$j]))
 									{
-									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+									echo  "<td class='case' id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
 									}else{
-									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+									echo  "<td class='case' id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
 									}
 												}
 					
@@ -318,9 +322,9 @@ for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
 								$compt++;
 								if(isset($jury[$j]))
 								{
-									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+									echo  "<td class='case' id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
 								}else{
-									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+									echo  "<td class='case' id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
 								}
 							}
 						}
@@ -352,9 +356,9 @@ for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
 									$compt++;
 									if(isset($jury[$j]))
 									{
-									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+									echo  "<td class='case' id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
 									}else{
-									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+									echo  "<td class='case' id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
 									}
 												}
 					
@@ -398,9 +402,9 @@ for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
 								$compt++;
 								if(isset($jury[$j]))
 								{
-									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+									echo  "<td class='case' id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
 								}else{
-									echo  "<td id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+									echo  "<td class='case' id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
 								}
 							}
 						}
@@ -462,8 +466,9 @@ echo "</tr>";
 <input type='submit' value='Ajouter une projection'/>
 <input type="hidden" name="jourprem" value="">
 <input type="hidden" name="jourprem" value="">
-
 </form>
+
+<button id="supprimer">Supprimer</button>
 
 </body>
 </html>
