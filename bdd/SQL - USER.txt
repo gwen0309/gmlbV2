@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS 'utilisateur' (
+  'ID_UTILISATEUR' smallint(6) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  'LOGIN' varchar(20) DEFAULT NULL,
+  'PASSWORD' varchar(20) DEFAULT NULL,
+  PRIMARY KEY ('ID_UTILISATEUR'),
+  UNIQUE KEY 'ID_UTILISATEUR' ('ID_UTILISATEUR')
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+INSERT INTO 'utilisateur' ('ID_UTILISATEUR', 'LOGIN', 'PASSWORD') VALUES
+(000001, 'admin', 'admin'),
+(000002, 'hebergement', 'hebergement'),
+(000003, 'projection', 'projection');

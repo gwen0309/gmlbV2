@@ -22,7 +22,7 @@ nav li{
         list-style: none;
         background: #111;
 		border-top: 15px solid black; /* Decale le menu de 15px vers le haut */
-		font: bold 15px/25px Arial, Helvetica;
+		font: bold 15px/25px 'Century Gothic';
 }
 
 #menu li{
@@ -38,7 +38,7 @@ nav li{
         color: #999;
         text-transform: uppercase;
         text-decoration: none;
-		font: bold 12px/25px Arial, Helvetica;
+		font: bold 12px/25px 'Century Gothic';
 		margin: 1px 0;
 		color: #999;
   		background: #111;
