@@ -15,8 +15,8 @@ session_start();
 		include("entete_deconnexion.php");?>
         <nav> 
             <ul id="menu">
-                <li> <a href="index_hebergement.php">Gestion des hébergements</a></li>
-                <li> <a href="planning.php">Gestion des projections</a></li>
+                <li> <a href="index_hebergement.html">Gestion des hébergements</a></li>
+                <li> <a href="#">Gestion des projections</a></li>
             </ul>
         </nav>
     </body>
