@@ -8,8 +8,6 @@
     </head>  
 
     <body>
-
-        <?php include("entete.php");?>
         <?php include("menuappli.php");?>
         <?php include("menuverticalhebergement.php");?>
     

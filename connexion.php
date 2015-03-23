@@ -27,12 +27,6 @@ mysqli_select_db($con, $bdd) or die("erreur lors de la selection de la bd");
 	  else {
 		session_start();
 		$_SESSION['login'] = $login;
-		
-		if ($login=='admin')
-			header('Location:menuappli.php');
-		else if ($login=='hebergement')
-			header('Location:menuappli.php');
-		else
 			header('Location:menuappli.php');
 		
 		// ici vous pouvez afficher un lien pour renvoyer

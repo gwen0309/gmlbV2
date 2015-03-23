@@ -1,24 +1,45 @@
 <!DOCTYPE html>
-<html lang="fr"> 
+<?php
+session_start();
+?>
+<html lang="fr">  
     <head>
-        <meta charset="utf-8">	       
-        <link rel="stylesheet" type="text/css" href="general.css" media="all">
-        <link rel="stylesheet" type="text/css" href="styles.css" media="all"> <!-- Qui sera a supprimer-->
-        <title> Saisie Caractéristiques Hébergement</title>	
-    </head>  
+            <link rel="stylesheet" type="text/css" href="general.css" media="all"> <!-- A modifier par menuhorizontal.css-->
+            <link rel="stylesheet" type="text/css" href="menuhorizontal.css" media="all">
+			<meta charset="utf-8">	       
+			<link rel="stylesheet" type="text/css" href="styles.css" media="all"> <!-- Qui sera a supprimer-->
+			<title> Saisie Caractéristiques Hébergement</title>	
+
+    </head>
 
     <body>
 
-        <?php include("entete.php");?>
-        <?php include("menuappli.php");?>
-        <?php include("menuverticalhebergement.php");?>
+        <?php 	if ($_SESSION['login'] != null)
+			include("entete_deconnexion.php");
+		else
+			include("entete.php");
+		
+		include("menuverticalhebergement.php");?>
 
-
+		<nav> 
+			<ul id="menu">
+				<li> <a href="caracteristique.php">Gestion des hébergements</a></li>
+			</ul>
+		</nav>
+		
         <?php 
+// Déclaration des paramètres de connexion
+$host = "localhost";
+$user = "root";
+$bdd = "filrouge";
+$password  = "";
 
-		include("connexion.php");
+// Connexion au serveur
+$con = mysqli_connect($host, $user, $password);
+mysqli_select_db($con, $bdd) or die("erreur lors de la selection de la bd");
+
         $query = "SELECT ID_SERVICE, NOM_SERVICE FROM SERVICE;"; 
-		$result=mysqli_query($con,$query) or die ('Erreur SQL !'.$query.'<br />'. mysqli_error($query));
+		$result = mysqli_query($con,$query) or die ('Erreur SQL !'.$query.'<br />'. mysqli_error($query));
         ?>
         <div id="caracteristics">
                 <div id="general">

@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+session_start();
+?>
 <html lang="fr"> 
     <head>
         <meta charset="utf-8">	       
@@ -9,12 +12,11 @@
         <script type="text/javascript" src="scripts/calendrier.js"></script>
 		<script type="text/javascript" src="scripts/ProjectionJS.js"></script>
 
-         <title> Saisi Projection</title>	
+         <title> Saisie Projection</title>	
     </head>  
 
     <body>
 
-            <?php include("entete.php");?>
             <?php include("menuappli.php");?>
 
     <?php 

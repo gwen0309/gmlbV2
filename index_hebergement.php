@@ -8,17 +8,9 @@
 </head>  
 
 <body>
-<?php include("entete.php");?>
-<?php include("menuappli.php");?>
-<?php include("menuverticalhebergement.php");?>
-
-
-
-
 <div>
 
-<h3>Bienvenu les Lapinous sur la page de gestion des hébergements</h3>
-<p>Choissisez une action à effectuer</p>
+<p><?php include("caracteristique.php"); ?></p>
 
 </div>
 
