@@ -5,8 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="general.css" media="all">
         <link rel="stylesheet" type="text/css" href="menuvertical.css" media="all">
-		<link rel="stylesheet" type="text/css" href="menuhorizontal.css" media="all">
-
+		
   <script type="text/javascript" src="scripts/jquery.min.js"></script> 	
   <script type="text/javascript" src="scripts/ProjectionJS.js"></script>  
   <link rel="stylesheet" href="styles/StylesProj.css" type="text/css" />
@@ -25,8 +24,8 @@ $user = "root";
 $bdd = "filrouge";
 $password  = "";  
 
-$con = mysqli_connect($host, $user,$password) or die("erreur de connexion au serveur");
-mysqli_select_db($con, $bdd) or die("erreur de connexion a la base de donnees");
+mysql_connect($host, $user,$password) or die("erreur de connexion au serveur");
+mysql_select_db($bdd) or die("erreur de connexion a la base de donnees");
 
 if (isset($_POST['value']))
 {
@@ -82,27 +81,27 @@ $DR = $atamp.'-'.$mtamp.'-'.$jtamp;
 
 $querydate= "select NOM_FILM, NOM_SALLE, TIME(DATE_DEBUT_PROJECTION), TIME(DATE_FIN_PROJECTION), DATE(DATE_DEBUT_PROJECTION), f.ID_FILM, ID_PROJECTION, CATEGORIE FROM projeter p 
 INNER JOIN films f ON f.ID_FILM = p.ID_FILM  INNER JOIN salle s ON s.ID_SALLE = p.ID_SALLE ORDER BY NOM_FILM";
-$result = mysqli_query($con, $querydate);
+$result = mysql_query($querydate);
 
 $querysalle= "select NOM_SALLE, ID_SALLE FROM salle";
-$resultsalle = mysqli_query($con, $querysalle);
+$resultsalle = mysql_query($querysalle);
 
 $i = 0;
 $b =0;
 $compteur=0;
 
-while($rowsalle = mysqli_fetch_array($resultsalle)){
+while($rowsalle = mysql_fetch_array($resultsalle)){
 $ids[$b] = $rowsalle['ID_SALLE'];
 $Noms[$b] = $rowsalle['NOM_SALLE'];
 $b++;
 }
 
-while($row = mysqli_fetch_array($result)){
+while($row = mysql_fetch_array($result)){
 $idp[$i] = $row['ID_PROJECTION'];
 $idf[$i] =	$row['ID_FILM'];
-$resultfilm = mysqli_query($con, "SELECT N__JURY FROM jury j INNER JOIN juger j2 ON j.ID_INDIVIDU = j2.ID_INDIVIDU WHERE ID_FILM = '$idf[$i]'");
+$resultfilm = mysql_query("SELECT N__JURY FROM jury j INNER JOIN juger j2 ON j.ID_INDIVIDU = j2.ID_INDIVIDU WHERE ID_FILM = '$idf[$i]'");
 
-while($array = mysqli_fetch_array($resultfilm)){
+while($array = mysql_fetch_array($resultfilm)){
 $jury[$i] = $array['N__JURY'];
 }
 $Nomsp[$i] = $row['NOM_SALLE'];

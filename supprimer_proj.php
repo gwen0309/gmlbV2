@@ -14,12 +14,12 @@ $user = "root";
 $bdd = "filrouge";
 $password  = "";
 
-$con = mysqli_connect($host, $user,$password) or die("erreur de connexion au serveur");
-mysqli_select_db($con, $bdd) or die("erreur de connexion a la base de donnees");
+mysql_connect($host, $user,$password) or die("erreur de connexion au serveur");
+mysql_select_db($bdd) or die("erreur de connexion a la base de donnees");
 
 $ids=$_POST['ids'];
 $query=("DELETE FROM projeter WHERE ID_PROJECTION = '$ids'");
- $result = mysqli_query($con, $query);
+ $result = mysql_query($query);
  
  	echo'<script>
 alert("Projection supprimée");

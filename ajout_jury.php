@@ -22,24 +22,24 @@
     $bdd = "filrouge";
     $password  = "";
 
-    $con = mysqli_connect($host, $user,$password) or die("erreur de connexion au serveur");
-    mysqli_select_db($con, $bdd) or die("erreur de connexion a la base de donnees");
+    mysql_connect($host, $user,$password) or die("erreur de connexion au serveur");
+    mysql_select_db($bdd) or die("erreur de connexion a la base de donnees");
 	
 	  $queryfilms = "SELECT NOM_FILM, ID_FILM FROM films WHERE id_film <> ALL (SELECT ID_FILM FROM juger)";
-	  $resultfilms=mysqli_query($con,$queryfilms);
+	  $resultfilms=mysql_query($queryfilms);
 	  
 	$queryjury = "SELECT N__JURY, count(id_film) AS NB_FILM FROM jury j inner join juger jj on j.id_individu = jj.id_individu where j.id_individu = jj.id_individu group by j.id_individu  ";
-	$resultjury=mysqli_query($con,$queryjury);
+	$resultjury=mysql_query($queryjury);
 	
 	$p=0;
-	while($array = mysqli_fetch_array($resultfilms)){
+	while($array = mysql_fetch_array($resultfilms)){
     $Nomf[$p] = $array['NOM_FILM'];
 	$idf[$p] = $array['ID_FILM'];
     $p++;
     }
 	
 	$r=0;
-	while($array2 = mysqli_fetch_array($resultjury)){
+	while($array2 = mysql_fetch_array($resultjury)){
     $Numj[$r] = $array2['N__JURY'];
 	$nbfilm[$r] = $array2['NB_FILM'];
     $r++;

@@ -14,8 +14,8 @@ $user = "root";
 $bdd = "filrouge";
 $password  = "";
 
-$con = mysqli_connect($host, $user,$password) or die("erreur de connexion au serveur");
-mysqli_select_db($con, $bdd) or die("erreur de connexion a la base de donnees");
+mysql_connect($host, $user,$password) or die("erreur de connexion au serveur");
+mysql_select_db($bdd) or die("erreur de connexion a la base de donnees");
 
 
 $film=$_POST['film'];
@@ -24,9 +24,9 @@ $datej=$_POST['datejour'];
 $tr=$_POST['tr'];
 
 $queryfilm= "SELECT DUREE, CATEGORIE FROM films WHERE ID_FILM = '$film'";
-$resultfilm = mysqli_query($con, $queryfilm);
+$resultfilm = mysql_query($queryfilm);
  
- while($array = mysqli_fetch_array($resultfilm)){
+ while($array = mysql_fetch_array($resultfilm)){
 $duree[0] = $array['DUREE'];
 $cat[0] = $array['CATEGORIE'];
 }
@@ -64,10 +64,10 @@ $datefin = date('Y-m-d H:i:s', $date);
 /*-------Teste s'il y a des film prevus dans la meme salle---*/
 $z=0;
 $querytest= "SELECT TIME(DATE_DEBUT_PROJECTION), DATE(DATE_DEBUT_PROJECTION) FROM projeter WHERE ID_SALLE like '$salle'";
- $resulttest = mysqli_query($con, $querytest);
+ $resulttest = mysql_query($querytest);
 
  if($resulttest==true){
-	 while($array2 = mysqli_fetch_array($resulttest)){
+	 while($array2 = mysql_fetch_array($resulttest)){
 	$heuretest[$z] = $array2['TIME(DATE_DEBUT_PROJECTION)'];
 	$jourtest[$z] = $array2['DATE(DATE_DEBUT_PROJECTION)'];
 	$z++;
@@ -112,10 +112,10 @@ if($test>0){
  /*-----Fin test--------------*/
 if($test==900){
 	$queryproj= "INSERT INTO projeter (ID_FILM, ID_SALLE, DATE_DEBUT_PROJECTION, DATE_FIN_PROJECTION) VALUES ($film,$salle,'".$datej."','".$datefin."')";
-	$insertion = mysqli_query($con, $queryproj);
+	$insertion = mysql_query($queryproj);
 	for($f=0;$f<$j;$f++)
 	{
-		$insertjury = mysqli_query($con, "INSERT INTO juger (ID_INDIVIDU, ID_FILM) values ($jure[$f],$film)");
+		$insertjury = mysql_query("INSERT INTO juger (ID_INDIVIDU, ID_FILM) values ($jure[$f],$film)");
 	}
 	echo'<script>
 alert("Projection ajoutée");

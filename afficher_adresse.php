@@ -4,7 +4,6 @@
         <meta charset="utf-8">	       
         <link rel="stylesheet" type="text/css" href="general.css" media="all">
         <link rel="stylesheet" type="text/css" href="menuvertical.css" media="all">
-        <link rel="stylesheet" type="text/css" href="menuhorizontal.css" media="all">
         <link rel="stylesheet" type="text/css" href="styles.css" media="all"> <!-- Qui sera a supprimer-->
         <title> Lister Adresse</title>	
     </head>  
