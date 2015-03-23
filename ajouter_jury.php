@@ -14,14 +14,14 @@ $user = "root";
 $bdd = "filrouge";
 $password  = "";
 
-mysql_connect($host, $user,$password) or die("erreur de connexion au serveur");
-mysql_select_db($bdd) or die("erreur de connexion a la base de donnees");
+$con = mysqli_connect($host, $user,$password) or die("erreur de connexion au serveur");
+mysqli_select_db($con, $bdd) or die("erreur de connexion a la base de donnees");
 
 $film=$_POST['film'];
 $jury=$_POST['jury'];
 $j=0;
-$resultjury = mysql_query("SELECT ID_INDIVIDU FROM jury WHERE N__JURY = '$jury'");
-while($array2 = mysql_fetch_array($resultjury)){
+$resultjury = mysqli_query($con, "SELECT ID_INDIVIDU FROM jury WHERE N__JURY = '$jury'");
+while($array2 = mysqli_fetch_array($resultjury)){
 $jure[$j] = $array2['ID_INDIVIDU'];
 $j++; 
 }
@@ -29,7 +29,7 @@ $j++;
 
 for($i=0;$i<$j;$i++){
 	$queryproj= "INSERT INTO juger (ID_FILM, ID_INDIVIDU) VALUES ($film,$jure[$i])";
-	$insertion = mysql_query($queryproj);
+	$insertion = mysqli_query($con, $queryproj);
 }
 	echo'<script>
 alert("Jury ajouté");

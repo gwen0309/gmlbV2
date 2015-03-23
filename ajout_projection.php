@@ -22,23 +22,23 @@
     $bdd = "filrouge";
     $password  = "";
 
-    mysql_connect($host, $user,$password) or die("erreur de connexion au serveur");
-    mysql_select_db($bdd) or die("erreur de connexion a la base de donnees");
+    $con = mysqli_connect($host, $user,$password) or die("erreur de connexion au serveur");
+    mysqli_select_db($con, $bdd) or die("erreur de connexion a la base de donnees");
       
     $querydate= "select NOM_FILM, TIME(DATE_DEBUT_PROJECTION), TIME(DATE_FIN_PROJECTION), DATE(DATE_DEBUT_PROJECTION) FROM projeter p INNER JOIN films f WHERE f.ID_FILM = p.ID_FILM ORDER BY NOM_FILM";
-    $result = mysql_query($querydate);
+    $result = mysqli_query($con, $querydate);
 
     $queryfilms = "SELECT * FROM films";
     $querysalles = "SELECT * FROM salle ";
 
-	$resultfilms = mysql_query($queryfilms);
-    $resultsalles = mysql_query($querysalles);
+	$resultfilms = mysqli_query($con, $queryfilms);
+    $resultsalles = mysqli_query($con, $querysalles);
 
     $p = 0;
     $z = 0;
 	$ju = 0;
 
-    while($array = mysql_fetch_array($resultfilms)){
+    while($array = mysqli_fetch_array($resultfilms)){
     $idf[$p] = $array['ID_FILM'];
     $Nomf[$p] = $array['NOM_FILM'];
     $Dureef[$p] = $array['DUREE'];
@@ -47,7 +47,7 @@
     $p++;
     }
 
-    while($array2 = mysql_fetch_array($resultsalles)){
+    while($array2 = mysqli_fetch_array($resultsalles)){
     $ids[$z] = $array2['ID_SALLE'];
      $Noms[$z] = $array2['NOM_SALLE'];
     $z++;

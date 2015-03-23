@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="general.css" media="all">
-        <link rel="stylesheet" type="text/css" href="menuvertical.css" media="all">
+<link rel="stylesheet" type="text/css" href="menuvertical.css" media="all">
 		
   <script type="text/javascript" src="scripts/jquery.min.js"></script> 	
   <script type="text/javascript" src="scripts/ProjectionJS.js"></script>  
@@ -24,8 +24,8 @@ $user = "root";
 $bdd = "filrouge";
 $password  = "";  
 
-mysql_connect($host, $user,$password) or die("erreur de connexion au serveur");
-mysql_select_db($bdd) or die("erreur de connexion a la base de donnees");
+$con = mysqli_connect($host, $user,$password) or die("erreur de connexion au serveur");
+mysqli_select_db($con, $bdd) or die("erreur de connexion a la base de donnees");
 
 if (isset($_POST['value']))
 {
@@ -81,27 +81,27 @@ $DR = $atamp.'-'.$mtamp.'-'.$jtamp;
 
 $querydate= "select NOM_FILM, NOM_SALLE, TIME(DATE_DEBUT_PROJECTION), TIME(DATE_FIN_PROJECTION), DATE(DATE_DEBUT_PROJECTION), f.ID_FILM, ID_PROJECTION, CATEGORIE FROM projeter p 
 INNER JOIN films f ON f.ID_FILM = p.ID_FILM  INNER JOIN salle s ON s.ID_SALLE = p.ID_SALLE ORDER BY NOM_FILM";
-$result = mysql_query($querydate);
+$result = mysqli_query($con, $querydate);
 
 $querysalle= "select NOM_SALLE, ID_SALLE FROM salle";
-$resultsalle = mysql_query($querysalle);
+$resultsalle = mysqli_query($con, $querysalle);
 
 $i = 0;
 $b =0;
 $compteur=0;
 
-while($rowsalle = mysql_fetch_array($resultsalle)){
+while($rowsalle = mysqli_fetch_array($resultsalle)){
 $ids[$b] = $rowsalle['ID_SALLE'];
 $Noms[$b] = $rowsalle['NOM_SALLE'];
 $b++;
 }
 
-while($row = mysql_fetch_array($result)){
+while($row = mysqli_fetch_array($result)){
 $idp[$i] = $row['ID_PROJECTION'];
 $idf[$i] =	$row['ID_FILM'];
-$resultfilm = mysql_query("SELECT N__JURY FROM jury j INNER JOIN juger j2 ON j.ID_INDIVIDU = j2.ID_INDIVIDU WHERE ID_FILM = '$idf[$i]'");
+$resultfilm = mysqli_query($con, "SELECT N__JURY FROM jury j INNER JOIN juger j2 ON j.ID_INDIVIDU = j2.ID_INDIVIDU WHERE ID_FILM = '$idf[$i]'");
 
-while($array = mysql_fetch_array($resultfilm)){
+while($array = mysqli_fetch_array($resultfilm)){
 $jury[$i] = $array['N__JURY'];
 }
 $Nomsp[$i] = $row['NOM_SALLE'];
@@ -117,20 +117,20 @@ $i++;
 ?>
 
 <div id="onglet">											           
-          <ul id="lien_onglet">												             
-            <li class="active">              
+          <ul class="menu-vertical">												             
+            <li class="active, mv-item">              
               <a href="#onglet1">Planning</a>            
             </li>												             
-            <li>            
-            <a href="#onglet2">LM</a>            
+            <li class="mv-item">            
+            <a href="#onglet2">Long Métrage</a>            
             </li>												             
-            <li>            
-            <a href="#onglet3">CM</a>            
+            <li class="mv-item">            
+            <a href="#onglet3">Court Métrage</a>            
             </li>	
-			 <li>            
-            <a href="#onglet4">UCR</a>            
+			 <li class="mv-item">            
+            <a href="#onglet4">Un Certain Regard</a>            
             </li>
-          </ul>											           
+     	</ul>										           
           <div id="contenu_onglet">												             
             <div id="onglet1" class="contenu active">	
 			
@@ -461,14 +461,15 @@ echo "</tr>";
 </div>
    </div> 
 </div>
-	
-<form action='ajout_projection.php' > 
-<input type='submit' value='Ajouter une projection'/>
-<input type="hidden" name="jourprem" value="">
-<input type="hidden" name="jourprem" value="">
-</form>
 
-<button id="modifier">Modifier</button>
-
+<div id ="bouton">	
+    <form action='ajout_projection.php' > 
+    <input type='submit' value='Ajouter une projection'/>
+    <input type="hidden" name="jourprem" value="">
+    <input type="hidden" name="jourprem" value="">
+    </form>
+    
+    <button id="modifier">Modifier</button>
+</div>
 </body>
 </html>
