@@ -1,6 +1,6 @@
 //actionne l'onglet
 $(document).ready(function() {
-    $('#onglet #menu-vertical a').on('click', function(onglet)  {
+    $('#onglet #menu_onglet a').on('click', function(onglet)  {
         var lien = $(this).attr('href');
         $('#onglet ' + lien).show().siblings().hide();
    

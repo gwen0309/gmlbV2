@@ -135,7 +135,7 @@ $i++;
 
 <div id="onglet">
 	<div id="patate">											           
-          <ul class="menu-vertical">												             
+          <ul id="menu_onglet" class="menu-vertical">												             
             <li class="active, mv-item">              
               <a href="#onglet1">Planning</a>            
             </li>												             
