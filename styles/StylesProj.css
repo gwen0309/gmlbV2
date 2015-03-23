@@ -17,23 +17,26 @@ background:#e9c200;
 
 #contenu_onglet{
     display: inline-block;
-    margin-left: 6%;
+    margin-left: 7%;
     width: 80%;
 }
 #bouton{
     display: inline-block;
     float: right;
     margin-right: 16%;
-    margin-top: -1800px;
+    margin-top: -230%;
     position: relative;
 }
 
 #contenu_onglet table{
 	border-collapse: collapse;
+	text-align: center;
+	margin: 10px 5px 0px -7%;
 	
 }
 
 #contenu_onglet table td, tr, th{ 
 	width : auto;
 	height : auto;
+	padding: 18px 16px 5px 0px;
 }

@@ -41,7 +41,7 @@ mysqli_select_db($con, $bdd) or die("erreur lors de la selection de la bd");
 	}
 	else {
 	  echo '<p>Vous avez oublié de remplir un champ.</p>';
-	  include ('essai.html');
-	   exit;
+	  header ('location : login.php');
+	  exit;
 	}
 ?>

@@ -1,25 +1,18 @@
 <!DOCTYPE html>
 <html lang="fr"> 
     <head>
-    <meta charset="utf-8">	       
+        <meta charset="utf-8">	       
         <link rel="stylesheet" type="text/css" href="general.css" media="all">
-        <link rel="stylesheet" type="text/css" href="menuvertical.css" media="all">
-        <link rel="stylesheet" type="text/css" href="menuhorizontal.css" media="all">
         <link rel="stylesheet" type="text/css" href="styles.css" media="all"> <!-- Qui sera a supprimer-->
-        <title> Lister Hébergement</title>	
+        <title> Liste des hébergements</title>	
     </head>  
 
     <body>
+
         <?php include("entete.php");?>
         <?php include("menuappli.php");?>
-
-        <div>
-            <ul class="menu-vertical">
-                <li class="mv-item"><a href="caracteristique.php">Ajouter</a></li>
-    			<li class="mv-item"><a href="lister_hebergement.php">Lister</a></li>
-            </ul>
-        </div>
-
+        <?php include("menuverticalhebergement.php");?>
+    
         <div id="caracteristics">
             <?php
             $host = "localhost";  

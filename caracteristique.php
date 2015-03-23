@@ -3,7 +3,6 @@
     <head>
         <meta charset="utf-8">	       
         <link rel="stylesheet" type="text/css" href="general.css" media="all">
-        <link rel="stylesheet" type="text/css" href="menuvertical.css" media="all">
         <link rel="stylesheet" type="text/css" href="styles.css" media="all"> <!-- Qui sera a supprimer-->
         <title> Saisie Caractéristiques Hébergement</title>	
     </head>  
@@ -12,26 +11,12 @@
 
         <?php include("entete.php");?>
         <?php include("menuappli.php");?>
+        <?php include("menuverticalhebergement.php");?>
 
-
-        <div>
-            <ul class="menu-vertical">
-                <li class="mv-item"><a href="caracteristique.php">Ajouter</a></li>
-    			<li class="mv-item"><a href="lister_hebergement.php">Lister</a></li>
-            </ul>
-        </div>
 
         <?php 
 
-        // Déclaration des paramètres de connexion
-        $host = "localhost";  
-        $user = "root";
-        $bdd = "filrouge";
-        $password  = "";
-
-        // Connexion au serveur
-        $con = mysqli_connect($host, $user, $password)or die ("Erreur de connexion au serveur");
-        mysqli_select_db($con, $bdd) or die("Erreur lors de la selection de la bd");
+		include("connexion.php");
         $query = "SELECT ID_SERVICE, NOM_SERVICE FROM SERVICE;"; 
 		$result=mysqli_query($con,$query) or die ('Erreur SQL !'.$query.'<br />'. mysqli_error($query));
         ?>

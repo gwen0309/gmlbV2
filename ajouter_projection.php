@@ -112,11 +112,8 @@ if($test>0){
  /*-----Fin test--------------*/
 if($test==900){
 	$queryproj= "INSERT INTO projeter (ID_FILM, ID_SALLE, DATE_DEBUT_PROJECTION, DATE_FIN_PROJECTION) VALUES ($film,$salle,'".$datej."','".$datefin."')";
-	$insertion = mysqli_query($queryproj);
-	for($f=0;$f<$j;$f++)
-	{
-		$insertjury = mysqli_query($con, "INSERT INTO juger (ID_INDIVIDU, ID_FILM) values ($jure[$f],$film)");
-	}
+	$insertion = mysqli_query($con, $queryproj);
+
 	echo'<script>
 alert("Projection ajoutée");
 document.location.href="planning.php";

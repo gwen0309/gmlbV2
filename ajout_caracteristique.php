@@ -9,15 +9,8 @@
 
 <?php 
 
-// Déclaration des paramètres de connexion
-$host = "localhost";  
-$user = "root";
-$bdd = "filrouge";
-$password  = "";
-
-// Connexion au serveur
-$con = mysqli_connect($host, $user, $password) or die ("Erreur de connexion au serveur");
-mysqli_select_db($con, $bdd) or die("Erreur lors de la selection de la bd");
+include("connexion.php");
+session_start();
 
 $nom= mysqli_real_escape_string($con, $_POST['nom_hebergement']);
 $tel= mysqli_real_escape_string($con, $_POST['telephone']);

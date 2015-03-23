@@ -18,14 +18,8 @@
   
 include("entete.php");
 include("menuappli.php");
+include("connexion.php");
 
-$host = "localhost";  
-$user = "root";
-$bdd = "filrouge";
-$password  = "";  
-
-$con = mysqli_connect($host, $user,$password) or die("erreur de connexion au serveur");
-mysqli_select_db($con, $bdd) or die("erreur de connexion a la base de donnees");
 
 if (isset($_POST['value']))
 {
@@ -116,7 +110,8 @@ $i++;
 }
 ?>
 
-<div id="onglet">											           
+<div id="onglet">
+	<div id="patate">											           
           <ul class="menu-vertical">												             
             <li class="active, mv-item">              
               <a href="#onglet1">Planning</a>            
@@ -130,7 +125,8 @@ $i++;
 			 <li class="mv-item">            
             <a href="#onglet4">Un Certain Regard</a>            
             </li>
-     	</ul>										           
+     	</ul>		
+     </div>								           
           <div id="contenu_onglet">												             
             <div id="onglet1" class="contenu active">	
 			
@@ -156,7 +152,36 @@ for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
 				for( $j=0;$j<$i;$j++){
 					if($jourF[$jour]==$jourDebut[$j]){
 						if( $Nomsp[$j]==$Noms[$h]){
-							if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:59:00"){
+							if($DateDeb[$j]>= "08:00:00" && $DateDeb[$j]<= "12:00:00"){
+								$compt++;
+								if(isset($jury[$j]))
+								{
+									echo  "<td class='case' id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]<br> Numèro jury :  $jury[$j]</td>"; 
+								}else{
+									echo  "<td class='case' id='$idp[$j]'>$Nomf[$j]<br>Heure debut: $DateDeb[$j] Heure fin: $DateFin[$j]</td>"; 
+								}
+							}
+						}
+					}
+				}
+				if($compt==0){
+				echo "<td></td>";
+				}
+			}
+		}
+	echo "</tr><tr>";
+		
+	echo "<td>Projection après-midi du $jourF[$jour]</td>";
+		for($h=0;$h<$b;$h++){	
+			$compt=0;
+			if($jourF[$jour]==$DR){
+				echo "<td>Jour de relache</td>";
+			}
+			else {
+				for( $j=0;$j<$i;$j++){
+					if($jourF[$jour]==$jourDebut[$j]){
+						if( $Nomsp[$j]==$Noms[$h]){
+							if($DateDeb[$j]>= "13:00:00" && $DateDeb[$j]<= "17:00:00"){
 								$compt++;
 								if(isset($jury[$j]))
 								{
@@ -177,7 +202,7 @@ for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
 
 	echo "</tr><tr>";
 
-	echo "<td>Projection AM du $jourF[$jour]</td>";
+	echo "<td>Projection soir du $jourF[$jour]</td>";
 	for($h=0;$h<$b;$h++){	
 	$compt=0;
 				if($jourF[$jour]==$DR){
@@ -190,7 +215,7 @@ for($jour=0;$jour<$duree;$jour++){//nombre de jours de festival
 							
 							if( $Nomsp[$j]==$Noms[$h]){
 								
-								if($DateDeb[$j]>= "16:00:00" && $DateDeb[$j]<= "23:59:00" ){
+								if($DateDeb[$j]>= "18:00:00" && $DateDeb[$j]<= "23:59:00" ){
 									$compt++;
 									if(isset($jury[$j]))
 									{
