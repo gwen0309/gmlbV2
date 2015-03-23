@@ -22,21 +22,10 @@
             </div>
 </header>
 
-<nav> 
-	<ul id="menu">
-    	<li> <a href="#">Gestion des hébergements</a></li>
-        <li> <a href="#"></a></li>
-        <li> <a href="#"></a></li>
-        <li> <a href="#"></a></li>
-    </ul>
-</nav>
-
 <div>
 <ul class="menu-vertical">
     <li class="mv-item"><a href="caracteristique.php">Ajouter</a></li>
-    <li class="mv-item"><a href="#">Modifier</a></li>
     <li class="mv-item"><a href="lister_hebergement.php">Lister</a></li>
-    <li class="mv-item"><a href="#">test4</a></li>
 </ul>
 </div>
 
