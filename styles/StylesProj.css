@@ -22,10 +22,20 @@ background:#e9c200;
 }
 #bouton{
     display: inline-block;
-    float: right;
-    margin-right: 16%;
-    margin-top: -230%;
-    position: relative;
+	margin-top:400px;
+	margin-right:15%;
+	top: 0;
+	right:0;
+
+	z-index:99;
+    position:absolute;
+}
+
+#bouton.fixed{
+
+	position:fixed;
+	top:20px;
+	margin-top: 0;
 }
 
 #contenu_onglet table{

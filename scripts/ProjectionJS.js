@@ -30,3 +30,12 @@ $(document).ready(function(){
 	});
 });
   
+//Scripte sticky bouton
+$(window).scroll(function (event) {
+ 
+    if ($(this).scrollTop() >= 400) {
+      $('#bouton').addClass('fixed');
+    } else {
+      $('#bouton').removeClass('fixed');
+    }
+  });
