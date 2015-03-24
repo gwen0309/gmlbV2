@@ -11,7 +11,6 @@
         <?php include("entete.php");
         include("menuaccueil.php");
         include("connexion_bdd.php");
-		include("entete_deconnexion.php");
 		session_start();
 		?>
         
@@ -35,7 +34,7 @@
                     <p>Si vous souhaitez faire partie de nos partenaires Hébergement, merci de remplir ce formulaire. </p>
                     <p>Vous serez recontactés prochainement par l'organisation.</p> </br>
                     
-                    <form method="get" action="envoiMail.php">
+                    <form method="post" action="envoiMail.php">
                         <label>Nom de l'hébergement : </label> <input type="text" name="nom_hebergement" required/><br/>
 
                         <label>Numéro de téléphone :  </label><input type="tel" name="telephone" required/><br/>
