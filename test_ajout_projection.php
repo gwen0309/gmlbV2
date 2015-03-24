@@ -3,13 +3,9 @@
 
 function test_ajout($cat,$salle,$heureproj,$jourproj,$tr) {//teste si toutes les conditions sont rénuies pour ajouter dans la table projection
 
-$host = "localhost";  
-$user = "root";
-$bdd = "filrouge";
-$password  = "";
-
-$con = mysqli_connect($host, $user,$password) or die("erreur de connexion au serveur");
-mysqli_select_db($con, $bdd) or die("erreur de connexion a la base de donnees");
+include("connexion_bdd.php");
+include("entete_deconnexion.php");
+session_start();
 
 $z=0;
 $querytest= "SELECT TIME(DATE_DEBUT_PROJECTION), DATE(DATE_DEBUT_PROJECTION) FROM projeter WHERE ID_SALLE like '$salle'";

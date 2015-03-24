@@ -2,15 +2,17 @@
 <html lang="fr">  
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="general.css" media="all">
-        <link rel="stylesheet" type="text/css" href="connexion.css" media="all">	
+        <link rel="stylesheet" type="text/css" href="styles/general.css" media="all">
+        <link rel="stylesheet" type="text/css" href="styles/connexion.css" media="all">	
     </head>  
     
     <body>
     
-        <?php include("entete.php");?>
-        <?php include("menuaccueil.php");?>
-                    
+        <?php include("entete.php");
+        include("menuaccueil.php");
+        include("connexion_bdd.php");
+		session_start();
+		?>
         
             <div id="login">
                 <div id="EspaceConnexion"> 
@@ -32,7 +34,7 @@
                     <p>Si vous souhaitez faire partie de nos partenaires Hébergement, merci de remplir ce formulaire. </p>
                     <p>Vous serez recontactés prochainement par l'organisation.</p> </br>
                     
-                    <form method="get" action="envoiMail.php">
+                    <form method="post" action="envoiMail.php">
                         <label>Nom de l'hébergement : </label> <input type="text" name="nom_hebergement" required/><br/>
 
                         <label>Numéro de téléphone :  </label><input type="tel" name="telephone" required/><br/>

@@ -9,7 +9,7 @@
 
 <?php 
 
-include("connexion.php");
+include("connexion_bdd.php");
 session_start();
 
 $nom= mysqli_real_escape_string($con, $_POST['nom_hebergement']);

@@ -2,8 +2,8 @@
 <html lang="fr"> 
 <head>
 <meta charset="utf-8">	       
-        <link rel="stylesheet" type="text/css" href="general.css" media="all">
-        <link rel="stylesheet" type="text/css" href="styles.css" media="all"> <!-- Qui sera a supprimer-->
+        <link rel="stylesheet" type="text/css" href="styles/general.css" media="all">
+        <link rel="stylesheet" type="text/css" href="styles/styles.css" media="all"> <!-- Qui sera a supprimer-->
 <title> Saisie Caractéristiques Hébergement</title>	
 </head>  
 
