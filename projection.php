@@ -28,7 +28,7 @@ session_start();
     $con = mysqli_connect($host, $user,$password) or die("erreur de connexion au serveur");
     mysqli_select_db($con, $bdd) or die("erreur de connexion a la base de donnees");
 	
-	$val=$_POST['value'];
+	 echo $val=$_POST['value'];
 	
 	if($val=="ratatouille")
 	{

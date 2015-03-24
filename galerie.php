@@ -2,7 +2,7 @@
 <html lang="fr">  
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="styles/galerie.css" media="all">
+        <link rel="stylesheet" type="text/css" href="galerie.css" media="all">
     </head>  
     
     <body>        

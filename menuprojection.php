@@ -2,8 +2,8 @@
 
 <html lang="fr">  
     <head>
-            <link rel="stylesheet" type="text/css" href="styles/general.css" media="all"> <!-- A modifier par menuhorizontal.css-->
-            <link rel="stylesheet" type="text/css" href="styles/menuhorizontal.css" media="all">
+            <link rel="stylesheet" type="text/css" href="general.css" media="all"> <!-- A modifier par menuhorizontal.css-->
+            <link rel="stylesheet" type="text/css" href="menuhorizontal.css" media="all">
 
     </head>
     <body>

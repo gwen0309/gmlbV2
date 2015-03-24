@@ -2,8 +2,8 @@
 <html lang="fr"> 
     <head>
         <meta charset="utf-8">	       
-        <link rel="stylesheet" type="text/css" href="styles/general.css" media="all">
-        <link rel="stylesheet" type="text/css" href="styles/styles.css" media="all"> <!-- Qui sera a supprimer-->
+        <link rel="stylesheet" type="text/css" href="general.css" media="all">
+        <link rel="stylesheet" type="text/css" href="styles.css" media="all"> <!-- Qui sera a supprimer-->
         <title> Liste contact</title>	
     </head>  
 
@@ -12,11 +12,18 @@
         <?php /*?><?php include("entete.php");?><?php */?>
         <?php include("menuappli.php");?>
         <?php include("menuverticalhebergement.php");?>
-		<?php include("connexion_bdd.php");
-        session_start();?>
+
         <div id="caracteristics">
             <?php
-            
+            $host = "localhost";  
+            $user = "root";
+            $bdd = "filrouge";
+            $password  = "";
+            //Récupération de la variable
+            $ID=($_GET['ID_H']);
+            // Connexion au serveur
+            $con = mysqli_connect($host, $user, $password) or die ("Erreur de connexion au serveur");
+            mysqli_select_db($con, $bdd) or die("Erreur lors de la selection de la bd");
             // Creation et envoi de la requete
             $query = "SELECT NOM_CONTACT, PRENOM_CONTACT, MAIL_CONTACT, TEL_CONTACT FROM HEBERGEMENT WHERE ID_HEBERGEMENT LIKE '".$ID."'";
             ?>
