@@ -19,11 +19,13 @@
  
   <?php 
   include("date_festival.php");
-if ($_SESSION['login'] != null)
+if ($_SESSION['login'] != null){
+	
 			include("entete_deconnexion.php");
-		else
+}else{
 			include("entete.php");
-		
+}
+		include("connexion.php");
 		include("menuverticalprojection.php"); ?>
 
 <nav> 
@@ -33,16 +35,6 @@ if ($_SESSION['login'] != null)
 </nav>
 
 <?php
-
-// Déclaration des paramètres de connexion
-$host = "localhost";
-$user = "root";
-$bdd = "filrouge";
-$password  = "";
-
-// Connexion au serveur
-$con = mysqli_connect($host, $user, $password);
-mysqli_select_db($con, $bdd) or die("erreur lors de la selection de la bd");
 
 if (isset($_POST['value']))
 {

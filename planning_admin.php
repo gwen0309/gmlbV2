@@ -18,13 +18,14 @@
 <body>
  
   <?php 
-  
+  include("connexion.php");	
 if ($_SESSION['login'] != null)
 			include("entete_deconnexion.php");
 		else
 			include("entete.php");
 		
-		include("menuverticalprojection.php"); ?>
+		include("menuverticalprojection.php");
+		?>
 
 <nav> 
 	<ul id="menu">
@@ -36,14 +37,7 @@ if ($_SESSION['login'] != null)
 <?php
 
 // Déclaration des paramètres de connexion
-$host = "localhost";
-$user = "root";
-$bdd = "filrouge";
-$password  = "";
 
-// Connexion au serveur
-$con = mysqli_connect($host, $user, $password);
-mysqli_select_db($con, $bdd) or die("erreur lors de la selection de la bd");
 
 if (isset($_POST['value']))
 {
@@ -512,10 +506,8 @@ echo "</tr>";
 </div>
 
 <div id ="bouton">	
-    <form action='ajout_projection.php' > 
+    <form action='form_ajout_projection.php' > 
     <input type='submit' value='Ajouter une projection'/>
-    <input type="hidden" name="jourprem" value="">
-    <input type="hidden" name="jourprem" value="">
     </form>
     
     <button id="modifier">Modifier</button>
