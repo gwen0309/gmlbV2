@@ -11,7 +11,7 @@
 
         <?php include("entete.php");?>
         <?php include("menuappli.php");?>
-        <?php include("menuverticalhebergement.php");?>
+		<?php include("menuverticalhebergement.php");?>
 
         <div id="caracteristics">
             <?php
@@ -20,7 +20,7 @@
             $bdd = "filrouge";
             $password  = "";
             //Récupération de la variable
-            $ID= mysqli_real_escape_string($con, $_POST['ID_H']);
+            $ID=($_GET['ID_H']);
             // Connexion au serveur
             $con = mysqli_connect($host, $user, $password) or die ("Erreur de connexion au serveur");
             mysqli_select_db($con, $bdd) or die("Erreur lors de la selection de la bd");
