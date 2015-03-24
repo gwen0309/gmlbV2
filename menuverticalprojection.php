@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="styles/menuvertical.css" media="all">
-<link rel="stylesheet" type="text/css" href="styles/general.css" media="all">
+<link rel="stylesheet" type="text/css" href="menuvertical.css" media="all">
+<link rel="stylesheet" type="text/css" href="general.css" media="all">
 		
   <script type="text/javascript" src="scripts/jquery.min.js"></script> 	
   <script type="text/javascript" src="scripts/ProjectionJS.js"></script>  

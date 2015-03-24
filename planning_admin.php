@@ -1,11 +1,12 @@
 ﻿
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php session_start(); ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="styles/general.css" media="all">
-<link rel="stylesheet" type="text/css" href="styles/styles.css" media="all">
-<link rel="stylesheet" type="text/css" href="styles/menuhorizontal.css" media="all">
+<link rel="stylesheet" type="text/css" href="general.css" media="all">
+<link rel="stylesheet" type="text/css" href="styles.css" media="all">
+<link rel="stylesheet" type="text/css" href="menuhorizontal.css" media="all">
 		
   <script type="text/javascript" src="scripts/jquery.min.js"></script> 	
   <script type="text/javascript" src="scripts/ProjectionJS.js"></script>  
@@ -17,16 +18,13 @@
 <body>
  
   <?php 
-  include("connexion.php");	
+  
 if ($_SESSION['login'] != null)
 			include("entete_deconnexion.php");
 		else
 			include("entete.php");
 		
-		include("menuverticalprojection.php");
-		include("connexion_bdd.php");
-		session_start();
-		?>
+		include("menuverticalprojection.php"); ?>
 
 <nav> 
 	<ul id="menu">
@@ -38,7 +36,14 @@ if ($_SESSION['login'] != null)
 <?php
 
 // Déclaration des paramètres de connexion
+$host = "localhost";
+$user = "root";
+$bdd = "filrouge";
+$password  = "";
 
+// Connexion au serveur
+$con = mysqli_connect($host, $user, $password);
+mysqli_select_db($con, $bdd) or die("erreur lors de la selection de la bd");
 
 if (isset($_POST['value']))
 {
@@ -507,8 +512,10 @@ echo "</tr>";
 </div>
 
 <div id ="bouton">	
-    <form action='form_ajout_projection.php' > 
+    <form action='ajout_projection.php' > 
     <input type='submit' value='Ajouter une projection'/>
+    <input type="hidden" name="jourprem" value="">
+    <input type="hidden" name="jourprem" value="">
     </form>
     
     <button id="modifier">Modifier</button>
