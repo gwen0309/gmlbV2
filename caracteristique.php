@@ -7,7 +7,7 @@ session_start();
             <link rel="stylesheet" type="text/css" href="general.css" media="all"> <!-- A modifier par menuhorizontal.css-->
             <link rel="stylesheet" type="text/css" href="menuhorizontal.css" media="all">
 			<meta charset="utf-8">	       
-			<link rel="stylesheet" type="text/css" href="styles.css" media="all"> <!-- Qui sera a supprimer-->
+			<link rel="stylesheet" type="text/css" href="styles.css" media="all"> 
 			<title> Saisie Caractéristiques Hébergement</title>	
 
     </head>

@@ -6,7 +6,7 @@ session_start();
 // Déclaration des paramètres de connexion
 $host = "localhost";  
 $user = "root";
-$bdd = "essailogin";
+$bdd = "filrouge";
 $password  = "";
 
 // Connexion au serveur

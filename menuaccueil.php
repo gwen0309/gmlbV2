@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">  
     <head>
-            <link rel="stylesheet" type="text/css" href="styles.css" media="all"> <!-- A modifier par menuhorizontal.css-->
+            <link rel="stylesheet" type="text/css" href="styles.css" media="all">
             <link rel="stylesheet" type="text/css" href="menuhorizontal.css" media="all">
 
     </head>

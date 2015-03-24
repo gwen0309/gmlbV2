@@ -13,16 +13,14 @@ nav li{
 }  
 
 
-/* MENU HORIZONTAL */
-
 #menu{
         width: 100%;
         margin: 0;
         padding: 10px 0 0 0;
         list-style: none;
         background: #111;
-		border-top: 15px solid black; /* Decale le menu de 15px vers le haut */
-		font: bold 15px/25px 'Century Gothic';
+		border-top: 15px solid black;
+		font: bold 15px/25px Arial, Helvetica; 
 }
 
 #menu li{
@@ -38,23 +36,23 @@ nav li{
         color: #999;
         text-transform: uppercase;
         text-decoration: none;
-		font: bold 12px/25px 'Century Gothic';
+		font: bold 12px/25px Arial, Helvetica;
 		margin: 1px 0;
-		color: #999;
+  		color: #999;
   		background: #111;
   		text-decoration: none;
-	   -webkit-transition: all .3s; 
-	   -moz-transition: all .3s;
-	   transition: all .3s;
+	   -webkit-transition: all .3s; /* Chrome/Safari */
+	   -moz-transition: all .3s; /* Firefox */
+	   transition: all .3s; /* syntaxe officielle */
 }
 
 #menu li:hover > a{
 		background: #E9C200;
   		color: #FFF;
-  		padding-left: 30px; 
+  		padding-left: 30px;
 }
 
-*html #menu li a:hover{
+*html #menu li a:hover{ /* IE6 */
         color: #fafafa;
 }
 
@@ -154,4 +152,14 @@ nav li{
     -moz-border-radius: 0 0 5px 5px;
     -webkit-border-radius: 0 0 5px 5px;
     border-radius: 0 0 5px 5px;
+}
+
+#menu:after
+{
+	visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
 }
