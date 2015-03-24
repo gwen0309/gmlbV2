@@ -31,7 +31,7 @@ if($cat=="CM"&&$salle=="3"){ $test=900;}
 if($cat=="UCR"&&$salle=="2"){ $test=900;}
 if($cat=="UCR"&&$salle=="5"){ $test=900;}
 
-if( $heureproj>= "08:00:00" && $heureproj<= "12:59:00" && $tr=="oui"){
+if( $heureproj>= "08:00:00" && $heureproj<= "17:00:00" && $tr=="oui"){
 $test=9000;
 }
 if($test>0){
