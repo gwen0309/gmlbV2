@@ -12,7 +12,7 @@ $(document).ready(function() {
 //selectionne la case et envoie
 $(document).ready(function(){
 	var aa;
-	var cell;
+	var cell = "ratatouille";
 	$('table td').click(function(){
 	cell = $(this).attr('id');
 	aa = document.getElementById(cell).innerHTML;

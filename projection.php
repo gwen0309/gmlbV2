@@ -28,9 +28,9 @@ session_start();
     $con = mysqli_connect($host, $user,$password) or die("erreur de connexion au serveur");
     mysqli_select_db($con, $bdd) or die("erreur de connexion a la base de donnees");
 	
-	$val=$_POST['value'];
+	 echo $val=$_POST['value'];
 	
-	if(!isset($val))
+	if($val=="ratatouille")
 	{
 		echo'<script>alert("Selectionnez une projection"); document.location.href="planning.php";</script>';
 		exit;
@@ -59,7 +59,7 @@ session_start();
 	<?php echo "<input type='hidden' name='ids' value='$val'/>";?>
 	</form>
 
-	<form action='modif_proj.php'method="POST"  > 
+	<form action='modif_proj.php' method="POST"  > 
 	<input type='submit' value='Modifier'/>
 	<?php echo "<input type='hidden' name='ids' value='$val'/>"; ?>
 	</form>

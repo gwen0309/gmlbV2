@@ -51,11 +51,15 @@
 		$queryjury2 = "SELECT DISTINCT N__JURY FROM jury j  ";
 		$resultjury2=mysqli_query($con, $queryjury2);
 		while($array2 = mysqli_fetch_array($resultjury2)){
+			$test=0;
 			for($t=0;$t<$r;$t++){
-				if($Numj[$t]!=$array2['N__JURY']){
-					$Numj[$s] = $array2['N__JURY'];
-					$s++;
+				if($Numj[$t]==$array2['N__JURY']){
+					$test++;
 				}
+			}
+			if($test==0){
+			$Numj[$s] = $array2['N__JURY'];
+			$s++;
 			}
 		}
 		

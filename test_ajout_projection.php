@@ -108,6 +108,7 @@ function date_fest($date){
 }
 
 function date_fin($date,$tr,$duree){
+
 //30 minutes de présentation, 60 si tapis rouge
 if($tr=="oui")
 {
@@ -117,7 +118,7 @@ else
 {
 $date2 = strtotime("+30 minutes", $date);
 }
-$date = strtotime("+$duree[0] minutes", $date2);
+$date = strtotime("+$duree minutes", $date2);
 $datefin = date('Y-m-d H:i:s', $date);
 
 return $datefin;

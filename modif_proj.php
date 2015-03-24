@@ -27,7 +27,7 @@
     $con = mysqli_connect($host, $user,$password) or die("erreur de connexion au serveur");
     mysqli_select_db($con, $bdd) or die("erreur de connexion a la base de donnees");
 	
-	$ids=$_POST['ids'];
+	$kk=$_POST['ids'];
 	
 	$z=0;
 	$querysalles = "SELECT * FROM salle ";
@@ -83,10 +83,9 @@
     <label>Projection avec tapis rouge :</label> 
     <input type= "radio" name="tr" value="oui"/> Oui
     <input type= "radio" checked name="tr" value="non"/> Non</br>
-	
-	
-		<input type='submit' value='Ajouter la projection'>
-		<?php echo "<input type='hidden' name='ids' value='$ids'/>"; ?>
+		
+	<input type='submit' value='Ajouter la projection'>
+	<?php echo "<input type='hidden' name='ids' value='$kk'/>"; ?>
 
 	<input type="button" value="Annuler" onclick="location.href='planning.php'" />
     </div>

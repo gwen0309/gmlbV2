@@ -21,30 +21,29 @@
     $con = mysqli_connect($host, $user,$password) or die("erreur de connexion au serveur");
     mysqli_select_db($con, $bdd) or die("erreur de connexion a la base de donnees");
 
-	$ids=$_POST['ids'];
+	echo $ids=$_POST['ids'];
 	$datej=$_POST['datejour'];
 	$tr=$_POST['tr'];
 	$heure=$_POST['heure'];
 	$min=$_POST['min'];
 
-	$query= "SELECT CATEGORIE, DUREE, p.ID_SALLE FROM projeter p INNER JOIN films f ON f.ID_FILM = p.ID_FILM INNER JOIN salle s ON s.ID_SALLE = p.ID_SALLE WHERE ID_PROJECTION = '$ids'";
-    $resultat = mysqli_query($con,$query);
+	$query= "SELECT CATEGORIE, DUREE, p.ID_SALLE AS sallep FROM projeter p INNER JOIN films f ON f.ID_FILM = p.ID_FILM INNER JOIN salle s ON s.ID_SALLE = p.ID_SALLE WHERE ID_PROJECTION = '".$ids."'";
+    $resultat = mysqli_query($con,$query) or die ("Erreur dans la requête SQL ".mysql_error());
 
 	while($array = mysqli_fetch_array($resultat)){
-	$cat[0] = $array['CATEGORIE'];
-	$duree[0] = $array['DUREE'];
-    $salle[0] = $array['ID_SALLE'];
-    
+	$cat = $array['CATEGORIE'];
+	$duree = $array['DUREE'];
+    $salle = $array['sallep'];
 	}
 	
 	$date_conv= date_eclat($datej);
 	$date = date_debut($datej,$heure,$min);
 	$heureproj= traitement_heure($date);
 	$jourproj= traitement_jour($date);
-	$datefin =  date_fin($date,$tr,$duree[0]);
+	$datefin =  date_fin($date,$tr,$duree);
 	$datej= date_fest($date);
 	
-	$test= test_ajout($cat[0],$salle[0],$heureproj,$jourproj,$tr); 
+	$test= test_ajout($cat,$salle,$heureproj,$jourproj,$tr); 
 	if(	$date_conv< $jourp || $date_conv> $jourd)
 {
 	$test=99999;

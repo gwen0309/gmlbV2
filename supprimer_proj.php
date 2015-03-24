@@ -17,7 +17,7 @@ $password  = "";
 $con = mysqli_connect($host, $user,$password) or die("erreur de connexion au serveur");
 mysqli_select_db($con, $bdd) or die("erreur de connexion a la base de donnees");
 
-$ids=$_POST['ids'];
+echo $ids=$_POST['ids'];
 $query=("DELETE FROM projeter WHERE ID_PROJECTION = '$ids'");
  $result = mysqli_query($con, $query);
  

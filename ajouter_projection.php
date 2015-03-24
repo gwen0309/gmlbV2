@@ -32,8 +32,8 @@ $queryfilm= "SELECT DUREE, CATEGORIE FROM films WHERE ID_FILM = '$film'";
 $resultfilm = mysqli_query($con, $queryfilm);
  
  while($array = mysqli_fetch_array($resultfilm)){
-$duree[0] = $array['DUREE'];
-$cat[0] = $array['CATEGORIE'];
+$duree = $array['DUREE'];
+$cat = $array['CATEGORIE'];
 }
 
 /*-----Traitement date------*/
@@ -41,11 +41,11 @@ $date_conv= date_eclat($datej);
 $date = date_debut($datej,$heure,$min);
 $heureproj= traitement_heure($date);
 $jourproj= traitement_jour($date);
-$datefin =  date_fin($date,$tr,$duree[0]);
+$datefin =  date_fin($date,$tr,$duree);
 $datej= date_fest($date);
 
 /*------Testes dans test_ajout_projection.php--------*/
-$test=test_ajout($cat[0],$salle,$heureproj,$jourproj,$tr);
+$test=test_ajout($cat,$salle,$heureproj,$jourproj,$tr);
 if(	$date_conv< $jourp || $date_conv> $jourd)
 {
 	$test=99999;
