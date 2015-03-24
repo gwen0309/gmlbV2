@@ -1,0 +1,345 @@
+//SCRIPT SQL DES TABLES //
+
+drop table if exists ACCUEILLIR;
+drop table if exists ACTEUR;
+drop table if exists CHAMBRE;
+drop table if exists ETRE;
+drop table if exists FILMS;
+drop table if exists HEBERGEMENT;
+drop table if exists INDIVIDU;
+drop table if exists JOUER;
+drop table if exists JUGER;
+drop table if exists JURY;
+drop table if exists PROJETER;
+drop table if exists PROPOSER;
+drop table if exists REALISATEUR;
+drop table if exists REALISER;
+drop table if exists RESERVER;
+drop table if exists SALLE;
+drop table if exists SERVICE;
+drop table if exists TYPEFILM;
+drop table if exists UTILISATEUR;
+
+/*==============================================================*/
+/* Table : ACCUEILLIR                                                */
+/*==============================================================*/
+create table ACCUEILLIR
+(
+   ID_TYPE_FILM   smallint unsigned not null,                                             
+   ID_FILM          smallint unsigned not null,
+  primary key (ID_TYPE_FILM, ID_FILM)
+)engine=InnoDB;
+
+
+/*==============================================================*/
+/* Table : ACTEUR                                               */
+/*==============================================================*/
+create table ACTEUR
+(
+   ID_INDIVIDU          smallint unsigned not null,        
+   PERSONNAGE_INTERPRETE char(50),
+   primary key (ID_INDIVIDU)
+)engine=InnoDB;
+
+/*==============================================================*/
+/* Table : CHAMBRE                                              */
+/*==============================================================*/
+create table CHAMBRE
+(
+   ID_CHAMBRE           smallint unsigned not null auto_increment,
+   ID_HEBERGEMENT       int not null,
+   NOM_TYPE_DE_CHAMBRE  varchar(20),
+   NOMBRE_LITS          smallint,
+   CAPACITE_MAXIMALE    smallint,
+   ETAT                 smallint,
+   NUMERO_CHAMBRE       tinyint,
+   primary key (ID_CHAMBRE)
+)engine=InnoDB;
+/*==============================================================*/
+/* Table : ETRE                                                    */
+/*==============================================================*/
+create table ETRE
+(
+   ID_TYPE_FILM   smallint unsigned not null,                                             
+   ID_SALLE           tinyint unsigned not null,
+   primary key (ID_TYPE_FILM)
+)engine=InnoDB;
+
+/*==============================================================*/
+/* Table : FILMS                                                */
+/*==============================================================*/
+create table FILMS
+(
+   ID_FILM              smallint unsigned not null auto_increment,
+   NOM_FILM             varchar(50),
+   GENRE_FILM           varchar(50),
+   DUREE                double,
+   CATEGORIE            varchar(20),
+   primary key (ID_FILM)
+)engine=InnoDB;
+
+/*==============================================================*/
+/* Table : HEBERGEMENT                                          */
+/*==============================================================*/
+create table HEBERGEMENT
+(
+   ID_HEBERGEMENT       smallint unsigned not null auto_increment,
+   NOM_HEBERGEMENT      varchar(50),
+   TEL_HEBERGEMENT      numeric(50,0),
+   CAPACITE_HEBERGEMENT smallint,
+   NOMBRE_ETOILES       tinyint,
+   RIB                  varchar(30),
+   NUMERO_RUE_HEBERGEMENT smallint,
+   RUE_HEBERGEMENT      varchar(200),
+   CODE_POSTAL_HEBERGEMENT int,
+   VILLE_HEBERGEMENT    varchar(50),
+   NOM_CONTACT          varchar(50),
+   PRENOM_CONTACT       varchar(50),
+   MAIL_CONTACT         varchar(50),
+   TEL_CONTACT          numeric(50),
+   TYPE_HEBERGEMENT     char(20),
+      constraint CKC_TYPE_HEBERGEMENT_HEBERGEM check (TYPE_HEBERGEMENT is null or (TYPE_HEBERGEMENT in ('Hôtel','Location de vacances','Appartement','Gîte','Villa'))),
+   primary key (ID_HEBERGEMENT)
+)engine=InnoDB;
+
+/*==============================================================*/
+/* Table : INDIVIDU                                             */
+/*==============================================================*/
+create table INDIVIDU
+(
+   ID_INDIVIDU          smallint unsigned not null auto_increment,
+   NOM_INDIVIDU         varchar(20),
+   PRENOM_INDIVIDU      varchar(20),
+   NATIONALITE_INDIVIDU       varchar(15),
+   TEL_INDIVIDU         numeric(20,0),
+   TYPE_INDIVIDU        char(12),
+      constraint CKC_TYPE_INDIVIDU_ACTEUR check (TYPE_INDIVIDU is null or (TYPE_INDIVIDU in ('Acteur','Jury','Réalisateur'))),
+   primary key (ID_INDIVIDU)
+)engine=InnoDB;
+
+/*==============================================================*/
+/* Table : JOUER                                                */
+/*==============================================================*/
+create table JOUER
+(
+   ID_INDIVIDU          smallint not null,
+   ID_FILM              smallint not null,
+   primary key (ID_INDIVIDU, ID_FILM)
+)engine=InnoDB;
+
+/*==============================================================*/
+/* Table : JUGER                                                */
+/*==============================================================*/
+create table JUGER
+(
+   ID_INDIVIDU          smallint not null,                                             
+   ID_FILM              smallint not null,
+   primary key (ID_INDIVIDU, ID_FILM)
+)engine=InnoDB;
+
+/*==============================================================*/
+/* Table : JURY                                                 */
+/*==============================================================*/
+create table JURY
+(
+   ID_INDIVIDU          smallint not null,                                             
+   N__JURY              smallint,
+   primary key (ID_INDIVIDU)
+)engine=InnoDB;
+
+/*==============================================================*/
+/* Table : PROJETER                                             */
+/*==============================================================*/
+create table PROJETER
+(
+   ID_FILM              smallint not null,
+   ID_SALLE             smallint not null,
+   ID_PROJECTION        smallint unsigned not null unique auto_increment,
+   DATE_DEBUT_PROJECTION timestamp,
+   DATE_FIN_PROJECTION  timestamp,
+   primary key (ID_FILM, ID_SALLE, ID_PROJECTION)
+)engine=InnoDB;
+
+/*==============================================================*/
+/* Table : PROPOSER                                             */
+/*==============================================================*/
+create table PROPOSER
+(
+   ID_HEBERGEMENT       smallint not null,
+   ID_SERVICE           smallint not null,
+   primary key (ID_HEBERGEMENT, ID_SERVICE)
+)engine=InnoDB;
+
+/*==============================================================*/
+/* Table : REALISATEUR                                          */
+/*==============================================================*/
+create table REALISATEUR
+(
+   ID_INDIVIDU          smallint not null,
+   NOMBRE_DE_FILMS_PRESENTES smallint,
+   primary key (ID_INDIVIDU)
+)engine=InnoDB;
+
+/*==============================================================*/
+/* Table : REALISER                                             */
+/*==============================================================*/
+create table REALISER
+(
+   ID_INDIVIDU          smallint not null,                                 
+   ID_FILM              smallint not null,
+   primary key (ID_INDIVIDU, ID_FILM)
+)engine=InnoDB;
+
+/*==============================================================*/
+/* Table : RESERVER                                             */
+/*==============================================================*/
+create table RESERVER
+(
+   ID_TYPE_DE_CHAMBRE_MH smallint not null,
+   ID_INDIVIDU          smallint not null,
+   ID_RESERVATION       int unsigned not null unique auto_increment,                                                   
+   DATE_DEBUT_SEJOUR    timestamp,
+   DATE_FIN_SEJOUR      timestamp,
+   NOMBRE_DE__PERSONNES int,
+   primary key (ID_TYPE_DE_CHAMBRE_MH, ID_INDIVIDU, ID_RESERVATION) /*primary key voir pour id resa*/
+)engine=InnoDB;
+
+/*==============================================================*/
+/* Table : SALLE                                                */
+/*==============================================================*/
+create table SALLE
+(
+   ID_SALLE             tinyint unsigned not null auto_increment,
+   NOM_SALLE            varchar(50),
+   CAPACITE             smallint,
+   NUMERO_RUE_SALLE     smallint,
+   RUE_SALLE            varchar(200),
+   CODE_POSTAL_SALLE    int,
+   VILLE_SALLE          varchar(50),
+   primary key (ID_SALLE)
+)engine=InnoDB;
+
+/*==============================================================*/
+/* Table : SERVICE                                              */
+/*==============================================================*/
+create table SERVICE
+(
+   ID_SERVICE           smallint unsigned not null auto_increment,
+   NOM_SERVICE          varchar(50),
+   primary key (ID_SERVICE)
+)engine=InnoDB;
+
+/*==============================================================*/
+/* Table : TYPEFILM                                                */
+/*==============================================================*/
+create table TYPEFILM
+(
+   ID_TYPE_FILM   smallint unsigned not null auto_increment,                                             
+   LIBELLE_TYPE_FILM           varchar(5) not null,
+   primary key (ID_TYPE_FILM)
+)engine=InnoDB;
+
+
+/*==============================================================*/
+/* Table : UTILISATEUR                                          */
+/*==============================================================*/
+create table UTILISATEUR
+(
+   ID_UTILISATEUR       smallint unsigned not null auto_increment,
+   LOGIN                varchar(20),
+   PASSWORD             varchar(20)
+   primary key (ID_UTILISATEUR)
+)engine=InnoDB;
+
+alter table ACCUEILLIR add constraint FK_ACCUEILLIR foreign key (ID_TYPE_FILM)
+      references TYPE_FILM (ID_TYPE_FILM) on delete restrict on update restrict;
+alter table ACCUEILLIR add constraint FK_ACCUEILLIR_SALLE foreign key (ID_SALLE)
+      references SALLE (ID_SALLE) on delete restrict on update restrict;
+alter table ACTEUR add constraint FK_ETRE foreign key (ID_INDIVIDU)
+      references INDIVIDU (ID_INDIVIDU) on delete restrict on update restrict;
+alter table CHAMBRE add constraint FK_APPARTENIR foreign key (ID_HEBERGEMENT)
+      references HEBERGEMENT (ID_HEBERGEMENT) on delete restrict on update restrict;
+alter table JOUER add constraint FK_JOUER foreign key (ID_FILM)
+      references FILMS (ID_FILM) on delete restrict on update restrict;
+alter table JOUER add constraint FK_JOUER2 foreign key (ID_INDIVIDU)
+      references ACTEUR (ID_INDIVIDU) on delete restrict on update restrict;
+alter table JUGER add constraint FK_JUGER foreign key (ID_FILM)
+      references FILMS (ID_FILM) on delete restrict on update restrict;
+alter table JUGER add constraint FK_JUGER2 foreign key (ID_INDIVIDU)
+      references JURY (ID_INDIVIDU) on delete restrict on update restrict;
+alter table JURY add constraint FK_ETRE3 foreign key (ID_INDIVIDU)
+      references INDIVIDU (ID_INDIVIDU) on delete restrict on update restrict;
+alter table PROJETER add constraint FK_PROJETER foreign key (ID_SALLE)
+      references SALLE (ID_SALLE) on delete restrict on update restrict;
+alter table PROJETER add constraint FK_PROJETER2 foreign key (ID_FILM)
+      references FILMS (ID_FILM) on delete restrict on update restrict;
+alter table PROPOSER add constraint FK_PROPOSER foreign key (ID_SERVICE)
+      references SERVICE (ID_SERVICE) on delete restrict on update restrict;
+alter table PROPOSER add constraint FK_PROPOSER2 foreign key (ID_HEBERGEMENT)
+      references HEBERGEMENT (ID_HEBERGEMENT) on delete restrict on update restrict;
+alter table REALISATEUR add constraint FK_ETRE2 foreign key (ID_INDIVIDU)
+      references INDIVIDU (ID_INDIVIDU) on delete restrict on update restrict;
+alter table REALISER add constraint FK_REALISER foreign key (ID_FILM)
+      references FILMS (ID_FILM) on delete restrict on update restrict;
+alter table REALISER add constraint FK_REALISER2 foreign key (ID_INDIVIDU)
+      references REALISATEUR (ID_INDIVIDU) on delete restrict on update restrict;
+alter table RESERVER add constraint FK_RESERVER foreign key (ID_INDIVIDU)
+      references INDIVIDU (ID_INDIVIDU) on delete restrict on update restrict;
+alter table RESERVER add constraint FK_RESERVER2 foreign key (ID_TYPE_DE_CHAMBRE_MH)
+      references CHAMBRE_MH (ID_TYPE_DE_CHAMBRE_MH) on delete restrict on update restrict;
+
+
+// JEU D'ESSAI //
+
+INSERT INTO `filrouge`.`utilisateur` (`ID_UTILISATEUR`, `LOGIN`, `PASSWORD`)
+VALUES ('1', 'admin', 'admin'),( '2', 'hebergement', 'hebergement'),( '3', 'projection', 'projection');
+
+INSERT INTO `filrouge`.`hebergement` (`ID_HEBERGEMENT`, `NOM_HEBERGEMENT`, `TEL_HEBERGEMENT`, `CAPACITE_HEBERGEMENT`, `NOMBRE_ETOILES`, `RIB`, `NUMERO_RUE_HEBERGEMENT`, `RUE_HEBERGEMENT`, `CODE_POSTAL_HEBERGEMENT`, `VILLE_HEBERGEMENT`, `NOM_CONTACT`, `PRENOM_CONTACT`, `MAIL_CONTACT`, `TEL_CONTACT`, `TYPE_HEBERGEMENT`)
+VALUES ('66', 'InterContinental Carlton', '467934944', '135', '5', '0123456789', '58', 'La Croisette', '06414', 'Cannes', 'Leclercq', 'Bastien', 'bastien.leclercq@cannes.com', '0634125676', 'hotel'),
+('67', 'Majestic Barriere', '975182099', '349', '5', '0123456789', '10', 'La Croisette', '06407', 'Cannes', 'Gonzalez', 'Gwendoline', 'gwendoline.gonzalez@cannes.com', '0673050207', 'hotel'),
+('68', 'Hotel de Provence', '970731381', '30', '3', '0123456789', '9', 'Rue de Molière', '06400', 'Cannes', 'Dorj', 'Maxime', 'maxime.dorj@cannes.com', '0790731381', 'hotel'),
+('69', 'Radisson Blue', '492997320', '134', '4', '0123456789', '2', 'Boulevard Jean Hibert', '06400', 'Cannes', 'Bour', 'Lucie', 'lucie.bour@cannes.com', '0626490371', 'villa') ;
+
+INSERT INTO `service` (`ID_SERVICE`, `NOM_SERVICE`)
+VALUES (1, 'Sauna'), (2, 'Piscine'), (3, 'Hammam'), (4, 'Spa'), (5, 'Bar'), (6, 'Casino'), (7, 'Restaurant'), (8, 'Discotheque'), (9, 'Salle de sport'), (10, 'Golf'), (11, 'Wifi'), (12, 'Room service prive'), (13, 'Toiletteur pour animaux de compagnie');
+
+INSERT INTO `proposer` (`ID_HEBERGEMENT`, `ID_SERVICE`)
+VALUES (63, 1), (63, 3), (63, 4), (63, 5), (63, 6), (63, 7), (63, 9), (63, 10), (63, 11), (63, 12);
+
+INSERT INTO `films` (`ID_FILM`, `NOM_FILM`, `GENRE_FILM`, `DUREE`, `CATEGORIE`)
+VALUES (1, 'Superman', 'action', 30, 'LM'), (2, 'Batman', 'thriller', 84, 'CM'),
+(3, 'Ironman', 'comedie', 84, 'UCR'), (4, 'Journée trop longue', NULL, 48, 'LM'),
+(5, 'Citizen Kane', Drame, 48, 'CM'), (6, 'GTA', Combat, 48, 'UCR');
+
+INSERT INTO `individu` (`ID_INDIVIDU`, `NOM_INDIVIDU`, `PRENOM_INDIVIDU`, `NATIONALITE_INDIVIDU`, `TEL_INDIVIDU`, `TYPE_INDIVIDU`)
+VALUES (1, 'Pitt', 'Brad', 'americaine', '0678356230', 'acteur'), (2, 'Jolie', 'Angelina', 'francaise', '0745370124', 'jury'),
+(3, 'Di Caprio', 'Leonardo', 'italienne', '0623490631', 'acteur'), (4, 'Benattia', 'Nabilla', 'algerienne', '0623459806', 'jury'),
+(5, 'Cat', 'Grumpy', 'japonaise', NULL, 'jury'), (6, 'Watson', 'Emma', 'anglaise', '0753427906', 'acteur');
+
+INSERT INTO `jury` (`ID_INDIVIDU`, `N__JURY`)
+VALUES (2, 1), (4, 1), (5, 2);
+
+INSERT INTO `salle` (`ID_SALLE`, `NOM_SALLE`, `CAPACITE`, `NUMERO_RUE_SALLE`, `RUE_SALLE`, `CODE_POSTAL_SALLE`, `VILLE_SALLE`)
+VALUES (1, 'Grand Théâtre Lumière', 2400, 1, 'Boulevard de la Croisette', 06400, 'Cannes'),
+(2, 'Salle Debussy', 1000, 2, 'Boulevard de la Croisette', 06400, 'Cannes'),
+(3, 'Salle Buñuel', 500, 3, 'Boulevard de la Croisette', 06400, 'Cannes'),
+(4, 'Salle du Soixantième', 1000, 4, 'Boulevard de la Croisette', 06400, 'Cannes'),
+(5, 'Salle Bazin', 500, 5, 'Boulevard de la Croisette', 06400, 'Cannes');
+
+INSERT INTO `projeter` (`ID_FILM`, `ID_SALLE`, `ID_PROJECTION`, `DATE_DEBUT_PROJECTION`, `DATE_FIN_PROJECTION`)
+VALUES (1, 1, 102, '2015-05-21 06:00:00', '2015-05-21 07:30:00') ;
+
+INSERT INTO `type_film` (`ID_TYPE_FILM`, `LIBELLE_TYPE_FILM`)
+VALUES (1, 'LMEC'), (2, 'LMHC'), (3, 'CMEC'), (4, 'CMHC'), (5, 'UCR'), (6, 'PP');
+//Avec PP pour projection de presse//
+
+INSERT INTO `accueillir` (`ID_TYPE_FILM`, `ID_SALLE`)
+VALUES (1, 1), (1, 4), (2, 1), (3, 2), (3, 3), (4, 2), (5, 2), (5, 5), (6, 4), (6, 5);
+
+INSERT INTO `etre_2` (`ID_TYPE_FILM`, `ID_FILM`)
+VALUES (1, 1), (2, 2), (3, 3), (4, 6), (5, 5), (6, 4);
+
+INSERT INTO 'utilisateur' ('ID_UTILISATEUR', 'LOGIN', 'PASSWORD')
+VALUES (000001, 'admin', 'admin'),
+(000002, 'hebergement', 'hebergement'),
+(000003, 'projection', 'projection');
