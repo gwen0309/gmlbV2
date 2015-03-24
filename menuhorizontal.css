@@ -3,7 +3,7 @@
 /* Barre de Navigation */
 /***********************/
 nav{
-    margin: -2% 12% 1% 8%;
+    margin: -2% 0% 1% 14%;
     text-align: right;
     width: 80%;
 }
@@ -14,12 +14,13 @@ nav li{
 
 
 #menu{
-        width: 100%;
+		height: 40px;
+        width: 75%;
         margin: 0;
         padding: 10px 0 0 0;
         list-style: none;
         background: #111;
-		border-top: 15px solid black;
+		border-top: 34px solid black;
 		font: bold 15px/25px Arial, Helvetica; 
 }
 
@@ -154,12 +155,4 @@ nav li{
     border-radius: 0 0 5px 5px;
 }
 
-#menu:after
-{
-	visibility: hidden;
-    display: block;
-    font-size: 0;
-    content: " ";
-    clear: both;
-    height: 0;
-}
+

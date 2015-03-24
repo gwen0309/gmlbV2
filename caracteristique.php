@@ -4,9 +4,9 @@ session_start();
 ?>
 <html lang="fr">  
     <head>
+    		<meta charset="utf-8">	 
             <link rel="stylesheet" type="text/css" href="general.css" media="all"> <!-- A modifier par menuhorizontal.css-->
-            <link rel="stylesheet" type="text/css" href="menuhorizontal.css" media="all">
-			<meta charset="utf-8">	       
+            <link rel="stylesheet" type="text/css" href="menuhorizontal.css" media="all"> 
 			<link rel="stylesheet" type="text/css" href="styles.css" media="all"> 
 			<title> Saisie Caractéristiques Hébergement</title>	
 
@@ -16,8 +16,8 @@ session_start();
 
         <?php 	if ($_SESSION['login'] != null)
 			include("entete_deconnexion.php");
-		else
-			include("entete.php");
+		else{		
+		include("entete.php");}
 		
 		include("menuverticalhebergement.php");?>
 

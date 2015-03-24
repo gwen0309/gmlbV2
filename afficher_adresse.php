@@ -9,7 +9,7 @@
 
     <body>
 
-        <?php include("entete.php");?>
+        <?php /*?><?php include("entete.php");?><?php */?>
         <?php include("menuappli.php");?>
 		<?php include("menuverticalhebergement.php");?>
 

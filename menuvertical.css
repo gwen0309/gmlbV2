@@ -6,7 +6,7 @@
 .menu-vertical{
   list-style: none;
   padding: 4px;
-  margin: 0;
+  margin: 0px 0 0 8px;
   background: black;
   font: bold 15px/25px 'Century Gothic';
   float: left;
