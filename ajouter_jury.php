@@ -9,13 +9,9 @@
 <body>
 
   <?php 
-$host = "localhost";  
-$user = "root";
-$bdd = "filrouge";
-$password  = "";
 
-$con = mysqli_connect($host, $user,$password) or die("erreur de connexion au serveur");
-mysqli_select_db($con, $bdd) or die("erreur de connexion a la base de donnees");
+include("connexion_bdd.php");
+session_start();
 
 $film=$_POST['film'];
 $jury=$_POST['jury'];

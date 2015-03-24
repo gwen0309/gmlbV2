@@ -2,15 +2,18 @@
 <html lang="fr">  
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="general.css" media="all">
-        <link rel="stylesheet" type="text/css" href="connexion.css" media="all">	
+        <link rel="stylesheet" type="text/css" href="styles/general.css" media="all">
+        <link rel="stylesheet" type="text/css" href="styles/connexion.css" media="all">	
     </head>  
     
     <body>
     
-        <?php include("entete.php");?>
-        <?php include("menuaccueil.php");?>
-                    
+        <?php include("entete.php");
+        include("menuaccueil.php");
+        include("connexion_bdd.php");
+		include("entete_deconnexion.php");
+		session_start();
+		?>
         
             <div id="login">
                 <div id="EspaceConnexion"> 

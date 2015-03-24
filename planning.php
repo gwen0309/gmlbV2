@@ -4,9 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="general.css" media="all">
-<link rel="stylesheet" type="text/css" href="styles.css" media="all">
-<link rel="stylesheet" type="text/css" href="menuhorizontal.css" media="all">
+<link rel="stylesheet" type="text/css" href="styles/general.css" media="all">
+<link rel="stylesheet" type="text/css" href="styles/styles.css" media="all">
+<link rel="stylesheet" type="text/css" href="styles/menuhorizontal.css" media="all">
 		
   <script type="text/javascript" src="scripts/jquery.min.js"></script> 	
   <script type="text/javascript" src="scripts/ProjectionJS.js"></script>  
@@ -18,6 +18,7 @@
 <body>
  
   <?php 
+  
   include("date_festival.php");
 if ($_SESSION['login'] != null){
 	
@@ -25,8 +26,11 @@ if ($_SESSION['login'] != null){
 }else{
 			include("entete.php");
 }
-		include("connexion.php");
-		include("menuverticalprojection.php"); ?>
+		include("connexion_bdd.php");
+		include("menuverticalprojection.php");
+		session_start();
+		 ?>
+        
 
 <nav> 
 	<ul id="menu">
