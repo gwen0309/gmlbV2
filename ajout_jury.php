@@ -14,7 +14,7 @@
     <body>
 
             <?php include("entete.php");?>
-            <?php include("menuappli.php");?>
+            <?php //include("menuappli.php");?>
 
     <?php 
     $host = "localhost";  
@@ -28,8 +28,11 @@
 	  $queryfilms = "SELECT NOM_FILM, ID_FILM FROM films WHERE id_film <> ALL (SELECT ID_FILM FROM juger)";
 	  $resultfilms=mysqli_query($con, $queryfilms);
 	  
-	$queryjury = "SELECT N__JURY, count(id_film) AS NB_FILM FROM jury j inner join juger jj on j.id_individu = jj.id_individu where j.id_individu = jj.id_individu group by j.id_individu  ";
+	$queryjury = "SELECT N__JURY, count(id_film) AS NB_FILM FROM jury j INNER JOIN juger jj ON j.id_individu = jj.id_individu WHERE j.id_individu = jj.id_individu GROUP BY j.id_individu  ";
 	$resultjury=mysqli_query($con, $queryjury);
+	
+	$queryjury2 = "SELECT ID_INDIVIDU FROM jury j INNER JOIN juger jj ON j.id_individu = jj.id_individu WHERE  NOT IN(SELECT j.id_individu FROM jury j INNER JOIN juger jj ON j.id_individu = jj.id_individu WHERE j.id_individu = jj.id_individu ) GROUP BY N__JURY  ";
+	$resultjury2=mysqli_query($con, $queryjury2);
 	
 	$p=0;
 	while($array = mysqli_fetch_array($resultfilms)){
@@ -39,9 +42,15 @@
     }
 	
 	$r=0;
-	while($array2 = mysqli_fetch_array($resultjury)){
+	while($array2 = mysqli_fetch_array($resultjury2)){
     $Numj[$r] = $array2['N__JURY'];
-	$nbfilm[$r] = $array2['NB_FILM'];
+    $r++;
+    }
+	
+
+	while($array3 = mysqli_fetch_array($resultjury)){
+    $Numj[$r] = $array3['N__JURY'];
+	$nbfilm[$r] = $array3['NB_FILM'];
     $r++;
     }
 	?>

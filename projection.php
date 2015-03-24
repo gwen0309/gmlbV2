@@ -16,8 +16,8 @@ session_start();
     </head>  
 
     <body>
-
-            <?php include("menuappli.php");?>
+		<?php include("date_festival.php");?>
+        <?php //include("menuappli.php");?>
 
     <?php 
     $host = "localhost";  
@@ -30,9 +30,9 @@ session_start();
 	
 	$val=$_POST['value'];
 	
-	if($val=="")
+	if(!isset($val))
 	{
-		echo'<script>alert("Pas de projection selectionnée"); document.location.href="planning.php";</script>';
+		echo'<script>alert("Selectionnez une projection"); document.location.href="planning.php";</script>';
 		exit;
 	}
 	
@@ -59,9 +59,9 @@ session_start();
 	<?php echo "<input type='hidden' name='ids' value='$val'/>";?>
 	</form>
 
-	<form action='modifier_proj.php'method="POST"  > 
+	<form action='modif_proj.php'method="POST"  > 
 	<input type='submit' value='Modifier'/>
-	<?php echo "<input type='hidden' name='ids' value='$val'/>";?>
+	<?php echo "<input type='hidden' name='ids' value='$val'/>"; ?>
 	</form>
 
 	</div>

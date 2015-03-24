@@ -16,72 +16,36 @@
             <?php include("entete.php");?>
             <?php //include("menuappli.php");?>
 
-    <?php 
-    $host = "localhost";  
+<?php
+
+	
+	    $host = "localhost";  
     $user = "root";
     $bdd = "filrouge";
     $password  = "";
 
     $con = mysqli_connect($host, $user,$password) or die("erreur de connexion au serveur");
     mysqli_select_db($con, $bdd) or die("erreur de connexion a la base de donnees");
- 
-    $queryfilms = "SELECT * FROM films";
-    $querysalles = "SELECT * FROM salle ";
-
-	$resultfilms = mysqli_query($con, $queryfilms);
-    $resultsalles = mysqli_query($con, $querysalles);
-
-    $p = 0;
-    $z = 0;
-	$ju = 0;
-
-    while($array = mysqli_fetch_array($resultfilms)){
-    $idf[$p] = $array['ID_FILM'];
-    $Nomf[$p] = $array['NOM_FILM'];
-    $Dureef[$p] = $array['DUREE'];
-    $Catf[$p] = $array['CATEGORIE'];
-
-    $p++;
-    }
-
-    while($array2 = mysqli_fetch_array($resultsalles)){
+	
+	$ids=$_POST['ids'];
+	
+	$z=0;
+	$querysalles = "SELECT * FROM salle ";
+	$resultsalles = mysqli_query($con, $querysalles);
+	
+	    while($array2 = mysqli_fetch_array($resultsalles)){
     $ids[$z] = $array2['ID_SALLE'];
      $Noms[$z] = $array2['NOM_SALLE'];
     $z++;
     }
 
-    ?>
-
-    <div id="caracteristics">
-    <div id="general">
-	<form action='ajout_jury.php' > 
-	<input type='submit' value='Associer un jury à un film'/>
-
-	</form>
+?>
 	
-    <form method='post' action='ajouter_projection.php'>
+	<div id="caracteristics">
+    <div id="general">
+	<form method='post' action='modifier_proj.php'>
 
-    <label>Nom du film :</label> 
-    <select name='film' required >"
-    <?php
-    for($o =0; $o< $p ;$o++){
-             echo "<option value='$idf[$o]'>$Nomf[$o]</option>";
-    }?>
-    </select></br>
-
-    <label>Nom de la salle :</label> 
-    <select name='salle' required >
-    <?php
-    for($e =0; $e< $z ;$e++){
-             echo "<option value='$ids[$e]'>$Noms[$e] et $ids[$e]</option>";
-    }?>
-    </select></br>
-
-    <label>Projection avec tapis rouge :</label> 
-    <input type= "radio" name="tr" value="oui"/> Oui
-    <input type= "radio" checked name="tr" value="non"/> Non</br>
-
-    <label>Jour de projection :</label> 
+	<label>Jour de projection :</label> 
     <table class='ds_box' cellpadding='0' cellspacing='0' id='ds_conclass' style='display: none;'>
             <tr>
                     <td id='ds_calclass'></td>
@@ -108,7 +72,21 @@
         }	
     ?></select></br>
 	
-	<input type='submit' value='Ajouter la projection'>
+	<label>Nom de la salle :</label> 
+    <select name='salle' required >
+    <?php
+    for($e =0; $e< $z ;$e++){
+             echo "<option value='$ids[$e]'>$Noms[$e] et $ids[$e]</option>";
+    }?>
+    </select></br>
+	
+    <label>Projection avec tapis rouge :</label> 
+    <input type= "radio" name="tr" value="oui"/> Oui
+    <input type= "radio" checked name="tr" value="non"/> Non</br>
+	
+	
+		<input type='submit' value='Ajouter la projection'>
+		<?php echo "<input type='hidden' name='ids' value='$ids'/>"; ?>
 
 	<input type="button" value="Annuler" onclick="location.href='planning.php'" />
     </div>

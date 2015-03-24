@@ -33,7 +33,7 @@ $(document).ready(function(){
 //Scripte sticky bouton
 $(window).scroll(function (event) {
  
-    if ($(this).scrollTop() >= 400) {
+    if ($(this).scrollTop() >= 380) {
       $('#bouton').addClass('fixed');
     } else {
       $('#bouton').removeClass('fixed');
