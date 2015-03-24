@@ -12,16 +12,11 @@
   
 	include("date_festival.php");
 	include ("test_ajout_projection.php");
+	include("connexion_bdd.php");
+	include("entete_deconnexion.php");
+	session_start();
 	
-    $host = "localhost";  
-    $user = "root";
-    $bdd = "filrouge";
-    $password  = "";
-
-    $con = mysqli_connect($host, $user,$password) or die("erreur de connexion au serveur");
-    mysqli_select_db($con, $bdd) or die("erreur de connexion a la base de donnees");
-
-	echo $ids=$_POST['ids'];
+	$ids=$_POST['ids'];
 	$datej=$_POST['datejour'];
 	$tr=$_POST['tr'];
 	$heure=$_POST['heure'];
