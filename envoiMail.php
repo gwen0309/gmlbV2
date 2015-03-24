@@ -8,27 +8,27 @@
 $sujet = "Demande de partenariat";
 //echo $sujet;
 
-$nomhebergement = $_GET["nom_hebergement"];
+$nomhebergement = $_POST["nom_hebergement"];
 //echo $nomhebergement;
-$telhebergement = $_GET["telephone"];
+$telhebergement = $_POST["telephone"];
 //echo $telhebergement;
-$typehebergement = $_GET["type"];
+$typehebergement = $_POST["type"];
 //echo $typehebergement;
-$numrue = $_GET["numero_rue"];
+$numrue = $_POST["numero_rue"];
 //echo $numrue;
-$nomrue = $_GET["nom_rue"];
+$nomrue = $_POST["nom_rue"];
 //echo $nomrue;
-$cp = $_GET["CP"];
+$cp = $_POST["CP"];
 //echo $cp;
-$ville = $_GET["ville"];
+$ville = $_POST["ville"];
 //echo $ville;
-$nomcontact = $_GET["nom_contact"];
+$nomcontact = $_POST["nom_contact"];
 //echo $nomcontact;
-$prenomcontact = $_GET["prenom_contact"];
+$prenomcontact = $_POST["prenom_contact"];
 //echo $prenomcontact;
-$mailcontact = $_GET["mail_contact"];
+$mailcontact = $_POST["mail_contact"];
 //echo $mailcontact;
-$telcontact = $_GET["telephone_contact"];
+$telcontact = $_POST["telephone_contact"];
 //echo $telcontact;
 //echo "<br/>"; 
 
