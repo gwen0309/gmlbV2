@@ -27,7 +27,7 @@
 	$heure=$_POST['heure'];
 	$min=$_POST['min'];
 
-$query= "SELECT CATEGORIE, DUREE, p.ID_SALLE FROM projeter p INNER JOIN films f ON f.ID_FILM = p.ID_FILM INNER JOIN salle s ON s.ID_SALLE = p.ID_SALLE WHERE ID_PROJECTION = '$ids'";
+	$query= "SELECT CATEGORIE, DUREE, p.ID_SALLE FROM projeter p INNER JOIN films f ON f.ID_FILM = p.ID_FILM INNER JOIN salle s ON s.ID_SALLE = p.ID_SALLE WHERE ID_PROJECTION = '$ids'";
     $resultat = mysqli_query($con,$query);
 
 	while($array = mysqli_fetch_array($resultat)){
@@ -38,11 +38,11 @@ $query= "SELECT CATEGORIE, DUREE, p.ID_SALLE FROM projeter p INNER JOIN films f 
 	}
 	
 	$date_conv= date_eclat($datej);
-$date = date_debut($datej,$heure,$min);
-$heureproj= traitement_heure($date);
-$jourproj= traitement_jour($date);
-$datefin =  date_fin($date,$tr,$duree[0]);
-$datej= date_fest($date);
+	$date = date_debut($datej,$heure,$min);
+	$heureproj= traitement_heure($date);
+	$jourproj= traitement_jour($date);
+	$datefin =  date_fin($date,$tr,$duree[0]);
+	$datej= date_fest($date);
 	
 	$test= test_ajout($cat[0],$salle[0],$heureproj,$jourproj,$tr); 
 	if(	$date_conv< $jourp || $date_conv> $jourd)

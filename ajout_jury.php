@@ -28,31 +28,49 @@
 	  $queryfilms = "SELECT NOM_FILM, ID_FILM FROM films WHERE id_film <> ALL (SELECT ID_FILM FROM juger)";
 	  $resultfilms=mysqli_query($con, $queryfilms);
 	  
-	$queryjury = "SELECT N__JURY, count(id_film) AS NB_FILM FROM jury j INNER JOIN juger jj ON j.id_individu = jj.id_individu WHERE j.id_individu = jj.id_individu GROUP BY j.id_individu  ";
-	$resultjury=mysqli_query($con, $queryjury);
-	
-	$queryjury2 = "SELECT ID_INDIVIDU FROM jury j INNER JOIN juger jj ON j.id_individu = jj.id_individu WHERE  NOT IN(SELECT j.id_individu FROM jury j INNER JOIN juger jj ON j.id_individu = jj.id_individu WHERE j.id_individu = jj.id_individu ) GROUP BY N__JURY  ";
-	$resultjury2=mysqli_query($con, $queryjury2);
+	$queryjury = "SELECT DISTINCT N__JURY, count(id_film) AS NB_FILM FROM jury j INNER JOIN juger jj ON j.id_individu = jj.id_individu WHERE j.id_individu = jj.id_individu GROUP BY j.id_individu  ";
+	$resultjury=mysqli_query($con, $queryjury)or die(mysql_error());
 	
 	$p=0;
 	while($array = mysqli_fetch_array($resultfilms)){
     $Nomf[$p] = $array['NOM_FILM'];
 	$idf[$p] = $array['ID_FILM'];
     $p++;
-    }
+	}
 	
-	$r=0;
-	while($array2 = mysqli_fetch_array($resultjury2)){
-    $Numj[$r] = $array2['N__JURY'];
-    $r++;
-    }
-	
+	$nbr =  mysqli_num_rows($resultjury);
+ 
+	if ($nbr != 0){ 
+		$r=0;
+		while($array3 = mysqli_fetch_array($resultjury)){
+		$Numj[$r] = $array3['N__JURY'];
+		$nbfilm[$r] = $array3['NB_FILM'];	
+		$r++;
+		}
+		$s=$r;
+		$queryjury2 = "SELECT DISTINCT N__JURY FROM jury j  ";
+		$resultjury2=mysqli_query($con, $queryjury2);
+		while($array2 = mysqli_fetch_array($resultjury2)){
+			for($t=0;$t<$r;$t++){
+				if($Numj[$t]!=$array2['N__JURY']){
+					$Numj[$s] = $array2['N__JURY'];
+					$s++;
+				}
+			}
+		}
+		
+	}else if($nbr == 0)
+	{
+		$s=0;
+		$queryjury2 = "SELECT DISTINCT N__JURY FROM jury j  ";
+		$resultjury2=mysqli_query($con, $queryjury2);
+		while($array2 = mysqli_fetch_array($resultjury2)){
+			$Numj[$s] = $array2['N__JURY'];
+			$s++;
+		}		
+	}
 
-	while($array3 = mysqli_fetch_array($resultjury)){
-    $Numj[$r] = $array3['N__JURY'];
-	$nbfilm[$r] = $array3['NB_FILM'];
-    $r++;
-    }
+
 	?>
 	<div id="caracteristics">
     <div id="general">
@@ -69,7 +87,7 @@
     <label>Numèro de jury disponible :</label> 
     <select name='jury'  >
     <?php
-    for($e =0; $e< $r ;$e++){
+    for($e =0; $e< $s ;$e++){
              echo "<option value='$Numj[$e]'>Jury $Numj[$e] avec $nbfilm[$e] films à juger</option>";
     }?>
     </select></br>

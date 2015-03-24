@@ -69,7 +69,7 @@ document.location.href="planning.php";
 else if($test>=9000&&$test<99999)
 	{
 		echo'<script>
-alert("Pas de tapis rouge le matin");
+alert("Pas de tapis rouge le matin ou l\'après-midi");
 document.location.href="planning.php";
 </script>';
 }else if($test<900){
